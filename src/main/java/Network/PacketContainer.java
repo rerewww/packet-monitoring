@@ -1,7 +1,8 @@
 package Network;
 
-import Status.Status;
-import lombok.extern.log4j.Log4j;
+import Config.Status;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +10,26 @@ import java.util.List;
 /**
  * Created by son on 2018-10-28.
  */
-@Log4j
 public class PacketContainer {
     public List<Packet> packets = new ArrayList<>();
+    @Getter @Setter private int totalListen;
+    @Getter @Setter private int totalConnect;
+
+    public void setTotalCount() {
+        int cntListen = 0;
+        int cntEstablished= 0;
+        for (Packet packet : packets) {
+            if (Status.LISTENING.name().equals(packet.getStatus())) {
+                cntListen++;
+            }
+
+            if (Status.ESTABLISHED.name().equals(packet.getStatus())) {
+                cntEstablished++;
+            }
+        }
+        setTotalListen(cntListen);
+        setTotalConnect(cntEstablished);
+    }
 
     public List<Packet> getPackets() {
         return this.packets;
@@ -54,20 +72,12 @@ public class PacketContainer {
         packets.add(packet);
     }
 
-    public void print() {
-        int cntListen = 0;
-        int cntEstablished= 0;
+    public StringBuffer print() {
+        StringBuffer buffer = new StringBuffer();
         for (Packet packet : packets) {
-            if (Status.LISTENING.name().equals(packet.getStatus())) {
-                cntListen++;
-            }
-
-            if (Status.ESTABLISHED.name().equals(packet.getStatus())) {
-                cntEstablished++;
-            }
-            System.out.println(packet.print());
+            buffer.append(packet.print());
+            buffer.append("\n");
         }
-        System.out.println("[총 연결 대기 중]: " + cntListen);
-        System.out.println("[총 연결 중]: " + cntEstablished);
+        return buffer;
     }
 }

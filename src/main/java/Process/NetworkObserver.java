@@ -1,8 +1,9 @@
 package Process;
 
+import Command.Command;
 import Network.Packet;
 import Network.PacketContainer;
-import lombok.extern.log4j.Log4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -11,17 +12,20 @@ import java.io.InputStreamReader;
 /**
  * Created by son on 2018-10-28.
  */
-@Log4j
 public class NetworkObserver {
     private PacketContainer packetContainer;
+    private Command command;
 
-    public NetworkObserver(final PacketContainer packetContainer) {
+    @Autowired
+    public NetworkObserver(final PacketContainer packetContainer, final Command command) {
         this.packetContainer = packetContainer;
+        this.command = command;
     }
 
     public void detect() throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder();
-        processBuilder.command("cmd.exe", "/c", "netstat -no");
+        processBuilder.command(command.analyze());
+        processBuilder.command();
         Process process = processBuilder.start();
         System.out.println("네트워크 체크 중...");
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
@@ -32,8 +36,8 @@ public class NetworkObserver {
                 }
                 process.waitFor();
             } catch (InterruptedException e) {
-                log.warn(e.getMessage(), e);
             }
+        packetContainer.setTotalCount();
         process.destroy();
     }
 

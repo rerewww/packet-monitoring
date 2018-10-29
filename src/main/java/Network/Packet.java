@@ -1,6 +1,6 @@
 package Network;
 
-import Status.Status;
+import Config.Status;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.util.StringUtils;
