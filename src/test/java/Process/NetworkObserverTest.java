@@ -1,5 +1,6 @@
 package Process;
 
+import Command.Windows;
 import Network.PacketContainer;
 import org.junit.Test;
 
@@ -13,7 +14,8 @@ public class NetworkObserverTest {
     @Test
     public void test() throws IOException {
         PacketContainer packetContainer = new PacketContainer();
-        NetworkObserver networkObserver = new NetworkObserver(packetContainer);
+        Windows windows = new Windows();
+        NetworkObserver networkObserver = new NetworkObserver(packetContainer, windows);
 
         networkObserver.detect();
         networkObserver.availabilityProcess();

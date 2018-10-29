@@ -9,6 +9,8 @@
     <context:component-scan base-package="Service"/> <!-- Component 패키지 지정 -->
     <context:component-scan base-package="Process"/> <!-- Component 패키지 지정 -->
     <context:component-scan base-package="Network"/> <!-- Component 패키지 지정 -->
+    <context:component-scan base-package="Config" />
+    <context:component-scan base-package="Command" />
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
