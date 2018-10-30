@@ -22,6 +22,25 @@ public class NetworkObserver {
         this.command = command;
     }
 
+    public void ethernetAnalyze() throws IOException {
+        ProcessBuilder processBuilder = new ProcessBuilder();
+        processBuilder.command(command.ethernetAnalyze());
+        processBuilder.command();
+        Process process = processBuilder.start();
+
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream(), "MS949"))) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                packetContainer.sendRevicePacketMb(line);
+                line = bufferedReader.readLine();
+            }
+            process.waitFor();
+        } catch (InterruptedException e) {
+
+        }
+        process.destroy();
+    }
+
     public void detect() throws IOException {
         ProcessBuilder processBuilder = new ProcessBuilder();
         processBuilder.command(command.analyze());
@@ -48,7 +67,8 @@ public class NetworkObserver {
             if (packet.getPid().equals(String.valueOf(0))) {
                 continue;
             }
-            processBuilder.command("cmd.exe", "/c", "tasklist | findstr /c:\"" + packet.getPid() + "\"");
+
+            processBuilder.command(command.processFromPid(packet.getPid()));
             Process process = processBuilder.start();
 
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {

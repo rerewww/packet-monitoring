@@ -5,15 +5,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by son on 2018-10-28.
  */
 public class PacketContainer {
     public List<Packet> packets = new ArrayList<>();
+    public Map<String, Integer> packetsMb = new HashMap<>();
     @Getter @Setter private int totalListen;
     @Getter @Setter private int totalConnect;
+
+    public void sendRevicePacketMb(final String line) {
+        // 받은, 보낸 패킷 파싱
+    }
 
     public void setTotalCount() {
         int cntListen = 0;
@@ -76,7 +83,7 @@ public class PacketContainer {
         StringBuffer buffer = new StringBuffer();
         for (Packet packet : packets) {
             buffer.append(packet.print());
-            buffer.append("\n");
+            buffer.append("<br>");
         }
         return buffer;
     }
