@@ -6,4 +6,5 @@ package Command;
 public interface Command {
     public String[] analyze();
     public String[] processFromPid(final String pid);
+    public String[] ethernetAnalyze();
 }

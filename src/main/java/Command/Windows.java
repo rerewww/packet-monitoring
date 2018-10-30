@@ -19,4 +19,10 @@ public class Windows implements Command {
         String option = String.format("tasklist | findstr /c:\"%s\"", pid);
         return new String[] { cmdExe, prefix, option };
     }
+
+    @Override
+    public String[] ethernetAnalyze() {
+        String option = "-e";
+        return new String[] { cmdExe, prefix, cmd, option };
+    }
 }
