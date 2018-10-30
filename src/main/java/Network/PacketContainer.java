@@ -76,7 +76,7 @@ public class PacketContainer {
         StringBuffer buffer = new StringBuffer();
         for (Packet packet : packets) {
             buffer.append(packet.print());
-            buffer.append("\n");
+            buffer.append("<br>");
         }
         return buffer;
     }

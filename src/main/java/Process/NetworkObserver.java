@@ -48,7 +48,8 @@ public class NetworkObserver {
             if (packet.getPid().equals(String.valueOf(0))) {
                 continue;
             }
-            processBuilder.command("cmd.exe", "/c", "tasklist | findstr /c:\"" + packet.getPid() + "\"");
+
+            processBuilder.command(command.processFromPid(packet.getPid()));
             Process process = processBuilder.start();
 
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
