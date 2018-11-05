@@ -3,6 +3,8 @@ package Network;
 import Config.Status;
 import lombok.Getter;
 import lombok.Setter;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -79,12 +81,16 @@ public class PacketContainer {
         packets.add(packet);
     }
 
-    public StringBuffer print() {
-        StringBuffer buffer = new StringBuffer();
+    public JSONArray print() {
+        JSONArray jsonArray = new JSONArray();
+
         for (Packet packet : packets) {
-            buffer.append(packet.print());
-            buffer.append("<br>");
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("protocol", packet.getProtocol());
+            jsonObject.put("status", packet.getStatus());
+            jsonArray.put(jsonObject);
         }
-        return buffer;
+
+        return jsonArray;
     }
 }
