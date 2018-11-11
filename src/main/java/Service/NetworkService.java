@@ -1,7 +1,8 @@
 package Service;
 
 import Network.PacketContainer;
-import Process.NetworkObserver;
+import Pcap.JnetPcacp;
+import Pcap.JnetPcapFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +13,17 @@ import java.io.IOException;
  */
 @Service
 public class NetworkService {
-    private NetworkObserver networkObserver;
     private PacketContainer packetContainer;
+    private JnetPcapFactory jnetPcapFactory;
 
     @Autowired
-    public NetworkService(final PacketContainer packetContainer, final NetworkObserver networkObserver) {
+    public NetworkService(final PacketContainer packetContainer, final JnetPcapFactory jnetPcapFactory) {
         this.packetContainer = packetContainer;
-        this.networkObserver = networkObserver;
+        this.jnetPcapFactory = jnetPcapFactory;
     }
 
     public PacketContainer analyze() throws IOException {
-        networkObserver.detect();
-        networkObserver.availabilityProcess();
-        return packetContainer;
+        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
+        return jnetPcacp.analyze();
     }
 }

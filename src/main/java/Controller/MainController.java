@@ -28,9 +28,9 @@ public class MainController {
     public ModelAndView analyze() throws IOException {
         networkService.analyze();
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("totalListen", packetContainer.getTotalListen());
-        modelAndView.addObject("totalConnect", packetContainer.getTotalConnect());
-        modelAndView.addObject("totalPackets", packetContainer.print().toList());
+//        modelAndView.addObject("totalListen", packetContainer.getTotalListen());
+//        modelAndView.addObject("totalConnect", packetContainer.getTotalConnect());
+        modelAndView.addObject("totalPackets", packetContainer.buildJsonArray().toList());
         return modelAndView;
     }
 }
