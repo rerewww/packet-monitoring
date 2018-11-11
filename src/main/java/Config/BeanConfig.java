@@ -1,9 +1,8 @@
 package Config;
 
-import Command.CommandFactory;
-import Command.Windows;
+import Pcap.JnetPcapFactory;
+import Pcap.JnetPcapWindows;
 import Network.PacketContainer;
-import Process.NetworkObserver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,12 +11,6 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 public class BeanConfig {
-    @Bean
-    public Windows windows() {
-        System.out.println("Created Bean Windows");
-        return new Windows();
-    }
-
     @Bean()
     public PacketContainer packetContainer() {
         System.out.println("Created Bean packetContainer");
@@ -25,8 +18,18 @@ public class BeanConfig {
     }
 
     @Bean
-    public NetworkObserver networkObserver() {
-        CommandFactory commandFactory = new CommandFactory();
-        return new NetworkObserver(packetContainer(), commandFactory.getCommandImpl());
+    public JnetPcapWindows jnetPcapWindows() {
+        System.out.println("Created Bean JnetPcapWindows");
+        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
+        jnetPcapWindows.setPacketContainer(this.packetContainer());
+        return jnetPcapWindows;
+    }
+
+    @Bean()
+    public JnetPcapFactory jnetPcapFactory() {
+        JnetPcapFactory jnetPcapFactory = new JnetPcapFactory();
+        jnetPcapFactory.setJnetPcapWindows(this.jnetPcapWindows());
+        System.out.println("Created Bean jnetPcapFactory");
+        return jnetPcapFactory;
     }
 }
