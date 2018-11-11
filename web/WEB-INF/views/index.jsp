@@ -14,48 +14,61 @@
     <title>네트워크 탐지기</title>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="/resources/js/chart.js"></script>
-    <script type="text/javascript">
-      var result = new Array();
-      <c:forEach items="${totalPackets}" var="packet">
-      var packet = new Object();
-      packet.protocol = "${packet.protocol}";
-      packet.localAddress = "${packet.localAddress}";
-      packet.remoteAddress = "${packet.remoteAddress}";
-      packet.flag = "${packet.flag}";
-      result.push(packet);
-      </c:forEach>
-    </script>
+    <script type="text/javascript" src="/resources/js/packets.js"></script>
+    <style>
+      body {
+        background-color: #f4f3ef;
+        width: 100%;
+        height: 100%;
+      }
+      #main {
+          padding: 20px;
+      }
+      .box {
+        width: 260px;
+        height: 150px;
+        padding: 20px;
+        background-color: white;
+        margin-bottom: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 3px 0px 0px #999;
+      }
+      .box.system {
+        float: left;
+      }
+      .box.system.status {
+        margin-left: 35px;
+      }
+      .box.footer {
+        width: auto;
+        height: auto;
+        clear: both;
+        padding: 30px;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
-  <p>aaa</p>
   <div id="main">
-    <div class="infos">
-      <div id="system info">
-        <table border="1" style="border-collapse: collapse; width: 100%;">
-          <tbody>
-          <tr>
-            <td style="width: 26.938%;"></td>
-            <td style="width: 73.062%;"></td>
-          </tr>
-          <tr>
-            <td style="width: 26.938%;"></td>
-            <td style="width: 73.062%;"></td>
-          </tr>
-          <tr>
-            <td style="width: 26.938%;"></td>
-            <td style="width: 73.062%;"></td>
-          </tr>
-          <tr>
-            <td style="width: 26.938%;"></td>
-            <td style="width: 73.062%;"></td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id="total">2</div>
-    </div>
-    <div id="chart_div" style="width: 100%; height: 500px;">3</div>
+    <div class="box system"></div>
+      <div class="box system status"></div>
+  <div id="chart" class="box footer"></div>
+  <div id="packets" class="box footer"></div>
   </div>
-  <div id="packets">4</div>
   </body>
+
+  <script type="text/javascript">
+    var systemInfos = "${systemInfos}";
+    var result = new Array();
+    <c:forEach items="${totalPackets}" var="packet">
+    var packet = new Object();
+    packet.protocol = "${packet.protocol}";
+    packet.localAddress = "${packet.localAddress}";
+    packet.remoteAddress = "${packet.remoteAddress}";
+    packet.flag = "${packet.flag}";
+    result.push(packet);
+    </c:forEach>
+
+    packets.showPackets(result);
+  </script>
 </html>

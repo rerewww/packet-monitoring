@@ -2,7 +2,7 @@ package Controller;
 
 import Network.PacketContainer;
 import Service.NetworkService;
-import org.json.JSONArray;
+import Service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,18 +18,20 @@ import java.io.IOException;
 public class MainController {
     private PacketContainer packetContainer;
     private NetworkService networkService;
+    private SystemService systemService;
+
     @Autowired
-    public MainController(final PacketContainer packetContainer, final NetworkService networkService) {
+    public MainController(final PacketContainer packetContainer, final NetworkService networkService, final SystemService systemService) {
         this.packetContainer = packetContainer;
         this.networkService = networkService;
+        this.systemService = systemService;
     }
 
     @RequestMapping("/")
     public ModelAndView analyze() throws IOException {
         networkService.analyze();
         ModelAndView modelAndView = new ModelAndView("index");
-//        modelAndView.addObject("totalListen", packetContainer.getTotalListen());
-//        modelAndView.addObject("totalConnect", packetContainer.getTotalConnect());
+        modelAndView.addObject("systemInfos", systemService.getSystemOsName());
         modelAndView.addObject("totalPackets", packetContainer.buildJsonArray().toList());
         return modelAndView;
     }
