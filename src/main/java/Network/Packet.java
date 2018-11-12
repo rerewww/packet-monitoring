@@ -23,12 +23,4 @@ public class Packet {
         this.remoteAddress = remoteAddress;
         this.flag = flag;
     }
-
-    boolean isProcessName() {
-        return !StringUtils.isEmpty(processName);
-    }
-
-    private String getStatusMessage(final String status) {
-        return Status.getMessage(status);
-    }
 }
