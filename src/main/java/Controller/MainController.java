@@ -4,8 +4,8 @@ import Network.PacketContainer;
 import Service.NetworkService;
 import Service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.io.IOException;
  * Created by son on 2018-10-28.
  */
 
-@Controller
+@RestController
 public class MainController {
     private PacketContainer packetContainer;
     private NetworkService networkService;
@@ -29,10 +29,14 @@ public class MainController {
 
     @RequestMapping("/")
     public ModelAndView analyze() throws IOException {
-        networkService.analyze();
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", systemService.getSystemOsName());
-        modelAndView.addObject("totalPackets", packetContainer.buildJsonArray().toList());
         return modelAndView;
+    }
+
+    @RequestMapping("/detecting")
+    public String detect() throws IOException {
+        networkService.analyze();
+        return packetContainer.buildJsonArray().toString();
     }
 }

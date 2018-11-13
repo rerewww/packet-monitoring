@@ -15,7 +15,8 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="/resources/js/chart.js"></script>
     <script type="text/javascript" src="/resources/js/packets.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/resources/js/style.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
       body {
         background-color: #f4f3ef;
@@ -43,10 +44,14 @@
       }
       .box.footer {
         width: auto;
-        height: auto;
         clear: both;
         padding: 30px;
         margin-top: 20px;
+        overflow-y:scroll;
+      }
+
+      .packet:hover {
+        background-color: cornsilk;
       }
       .packet {
         padding: 3px;
@@ -74,6 +79,7 @@
     result.push(packet);
     </c:forEach>
 
-    packets.showPackets(result);
+    viewStyle.setPacketsDivHeight();
+    packets.startDetectPackets();
   </script>
 </html>

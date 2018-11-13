@@ -1,9 +1,7 @@
 package Network;
 
-import Config.Status;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.util.StringUtils;
 
 /**
  * Created by son on 2018-10-28.

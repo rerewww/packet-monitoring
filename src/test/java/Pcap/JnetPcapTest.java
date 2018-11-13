@@ -26,6 +26,7 @@ public class JnetPcapTest {
     @Test
     public void analyzeTest() {
         PacketContainer packetContainer = jnetPcacp.analyze();
+//        System.out.println(packetContainer.buildJsonArray().toString());
         assertThat(packetContainer.getPackets().size(), is(20));
     }
 }
