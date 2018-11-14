@@ -31,6 +31,9 @@ public class PacketContainer {
             jsonObject.put("protocol", packet.getProtocol());
             jsonObject.put("localAddress", packet.getLocalAddress());
             jsonObject.put("remoteAddress", packet.getRemoteAddress());
+            jsonObject.put("localPort", packet.getLocalPort());
+            jsonObject.put("remotePort", packet.getRemotePort());
+            jsonObject.put("size", packet.getSize());
             jsonObject.put("flag", packet.getFlag());
             jsonArray.put(jsonObject);
         }

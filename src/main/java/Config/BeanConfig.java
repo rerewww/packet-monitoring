@@ -3,33 +3,39 @@ package Config;
 import Pcap.JnetPcapFactory;
 import Pcap.JnetPcapWindows;
 import Network.PacketContainer;
+import aop.DetectPacketAop;
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by son on 2018-10-29.
  */
+@Slf4j
 @Configuration
 public class BeanConfig {
-    @Bean()
+    @Bean
+    public DetectPacketAop detectPacketAop() {
+        return new DetectPacketAop();
+    }
+
+    @Bean
     public PacketContainer packetContainer() {
-        System.out.println("Created Bean packetContainer");
         return new PacketContainer();
     }
 
     @Bean
     public JnetPcapWindows jnetPcapWindows() {
-        System.out.println("Created Bean JnetPcapWindows");
         JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
         jnetPcapWindows.setPacketContainer(this.packetContainer());
         return jnetPcapWindows;
     }
 
-    @Bean()
+    @Bean
     public JnetPcapFactory jnetPcapFactory() {
         JnetPcapFactory jnetPcapFactory = new JnetPcapFactory();
         jnetPcapFactory.setJnetPcapWindows(this.jnetPcapWindows());
-        System.out.println("Created Bean jnetPcapFactory");
         return jnetPcapFactory;
     }
 }

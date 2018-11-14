@@ -13,12 +13,10 @@ import java.io.IOException;
  */
 @Service
 public class NetworkService {
-    private PacketContainer packetContainer;
     private JnetPcapFactory jnetPcapFactory;
 
     @Autowired
-    public NetworkService(final PacketContainer packetContainer, final JnetPcapFactory jnetPcapFactory) {
-        this.packetContainer = packetContainer;
+    public NetworkService(final JnetPcapFactory jnetPcapFactory) {
         this.jnetPcapFactory = jnetPcapFactory;
     }
 

@@ -3,6 +3,7 @@ package Pcap;
 import Network.Packet;
 import Network.PacketContainer;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
 import org.jnetpcap.packet.PcapPacket;
@@ -19,6 +20,7 @@ import java.util.List;
 /**
  * Created by son on 2018-10-29.
  */
+@Slf4j
 public class JnetPcapWindows implements JnetPcacp {
     private PacketContainer packetContainer;
     @Setter
@@ -39,12 +41,12 @@ public class JnetPcapWindows implements JnetPcacp {
         List<PcapIf> allDevices = new ArrayList<>();
 
         if (Pcap.findAllDevs(allDevices, ERROR_BUF) != Pcap.OK) {
-            System.out.println("Error : " + ERROR_BUF.toString());
+            log.warn("[Error]: " + ERROR_BUF.toString());
         }
 
         for (PcapIf device : allDevices) {
             String description = (device.getDescription() != null) ? device.getDescription() : "No description available";
-            System.out.printf("%s [%s]\n", device.getName(), description);
+            log.info("[Network Device] : " + device.getName() + " " + description);
         }
         setDevice(allDevices.get(0));
     }
@@ -57,16 +59,30 @@ public class JnetPcapWindows implements JnetPcacp {
     public PacketContainer analyze() {
         Ip4 ip4 = new Ip4();
         Tcp tcp = new Tcp();
+
         Pcap pcap = Pcap.openLive(device.getName(), SNAP_LEN, FLAG, TIMEOUT, ERROR_BUF);
 
         pcap.loop(LOOP_VAL, new PcapPacketHandler<String>() {
             public void nextPacket(final PcapPacket pcapPacket, String user) {
                 if (pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
-                    String localAddress = String.format("%s:%d",  FormatUtils.ip(ip4.source()), tcp.source());
-                    String remoteAddress = String.format("%s:%d",  FormatUtils.ip(ip4.destination()), tcp.destination());
+                    String localAddress = FormatUtils.ip(ip4.source());
+                    String remoteAddress = FormatUtils.ip(ip4.destination());
+                    int localPort = tcp.source();
+                    int remotePort = tcp.destination();
                     String flag = StringUtils.collectionToDelimitedString(tcp.flagsEnum(), " ");
+                    int size = pcapPacket.getTotalSize();
 
-                    packetContainer.setPackets(new Packet(tcp.getName(), localAddress, remoteAddress, flag));
+                    packetContainer.setPackets(
+                            new Packet(
+                                    tcp.getName(),
+                                    localAddress,
+                                    remoteAddress,
+                                    localPort,
+                                    remotePort,
+                                    flag,
+                                    size
+                            )
+                    );
                 }
             }
         }, null);

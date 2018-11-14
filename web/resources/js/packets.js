@@ -19,7 +19,8 @@ var packets = {
         var length = result.length;
         for (var i = 0; i < length; i++) {
             var child = document.createElement('div');
-            var packet = "[" + i + "] " + result[i].protocol + " " + result[i].localAddress + " " + result[i].remoteAddress + " " + result[i].flag;
+            var info = result[i].localPort + " -> " + result[i].remotePort + " [" + result[i].flag + "]" + " Length: " + result[i].size;
+            var packet = "[" + i + "]　　　" + result[i].localAddress + "　　　" + result[i].remoteAddress + "　　　" + result[i].protocol + "　　　" + info;
             child.className = 'packet';
             child.innerText = packet;
             elemPackets.appendChild(child);
@@ -45,6 +46,6 @@ var packets = {
                     console.warn('error occurred: ', data.responseText);
                 }
             });
-        }.bind(this), 3000);
+        }.bind(this), 10000);
     }
 };
