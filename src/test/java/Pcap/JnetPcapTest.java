@@ -1,6 +1,7 @@
 package Pcap;
 
 import Network.PacketContainer;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Before;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.is;
@@ -9,6 +10,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by son on 2018-11-11.
  */
+@Slf4j
 public class JnetPcapTest {
     private JnetPcacp jnetPcacp;
 
