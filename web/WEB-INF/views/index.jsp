@@ -1,85 +1,178 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: son
-  Date: 2018-10-28
-  Time: 오후 6:26
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html lang="en"><head><style>
+  tr:hover td{
+    background: #45E1E8;
+  }
+</style>
 
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>네트워크 탐지기</title>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript" src="/resources/js/chart.js"></script>
-    <script type="text/javascript" src="/resources/js/packets.js"></script>
-    <script type="text/javascript" src="/resources/js/style.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <style>
-      body {
-        background-color: #f4f3ef;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      #main {
-          padding: 20px;
-      }
-      .box {
-        width: 260px;
-        height: 150px;
-        padding: 20px;
-        background-color: white;
-        margin-bottom: 30px;
-        border-radius: 15px;
-        box-shadow: 0px 3px 0px 0px #999;
-      }
-      .box.system {
-        float: left;
-      }
-      .box.system.status {
-        margin-left: 35px;
-      }
-      .box.footer {
-        width: auto;
-        clear: both;
-        padding: 30px;
-        margin-top: 20px;
-        overflow-y:scroll;
-      }
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
 
-      .packet:hover {
-        background-color: cornsilk;
-      }
-      .packet {
-        padding: 3px;
-      }
-    </style>
-  </head>
-  <body>
-  <div id="main">
-    <div class="box system"></div>
-      <div class="box system status"></div>
-  <div id="chart" class="box footer"></div>
-  <div id="packets" class="box footer"></div>
+  <title>Dashboard Template for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+
+  <script type="text/javascript" src="/resources/js/packets.js"></script>
+  <script type="text/javascript" src="/resources/js/style.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="../../resources/css/dashboard.css" rel="stylesheet">
+
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Dashboard</a></li>
+        <li><a href="#">Settings</a></li>
+        <li><a href="#">Profile</a></li>
+        <li><a href="#">Help</a></li>
+      </ul>
+      <form class="navbar-form navbar-right">
+        <input type="text" class="form-control" placeholder="Search...">
+      </form>
+    </div>
   </div>
-  </body>
+</nav>
 
-  <script type="text/javascript">
-    var systemInfos = "${systemInfos}";
-    var result = new Array();
-    <c:forEach items="${totalPackets}" var="packet">
-    var packet = new Object();
-    packet.protocol = "${packet.protocol}";
-    packet.localAddress = "${packet.localAddress}";
-    packet.remoteAddress = "${packet.remoteAddress}";
-    packet.flag = "${packet.flag}";
-    result.push(packet);
-    </c:forEach>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Export</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="">Nav item</a></li>
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+        <li><a href="">More navigation</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="">Nav item again</a></li>
+        <li><a href="">One more nav</a></li>
+        <li><a href="">Another nav item</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="row placeholders" style="
+">
+        <div class="col-xs-6 col-sm-3 placeholder">
 
-    viewStyle.setPacketsDivHeight();
-    packets.startDetectPackets();
-  </script>
-</html>
+          <h4>Label</h4>
+          <span class="text-muted">Something else</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+
+          <h4>Label</h4>
+          <span class="text-muted">Something else</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
+
+          <h4>Label</h4>
+          <span class="text-muted">Something else</span>
+        </div>
+
+      </div>
+
+      <div class="row placeholders">
+
+
+
+        <div class="col-xs-6 col-sm-3 placeholder" style="
+    width: 50%;
+">
+          <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA1NDY4NzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6IzFFMjkyQztmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
+          <h4>Label</h4>
+          <span class="text-muted">Something else</span>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder" style="
+    width: 50%;
+">
+          <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA1NDY4NzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6IzFFMjkyQztmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
+          <h4>Label</h4>
+          <span class="text-muted">Something else</span>
+        </div></div>
+
+      <h4 class="sub-header">Section title</h4>
+      <table class="table table-striped" style="
+    margin-bottom: 0;">
+        <thead>
+        <tr>
+          <th id='headerNum' style="width: 10%">Number</th>
+          <th id='headerLa' style="width: 20%">LocalAddress</thi>
+          <th id='headerRe' style="width: 20%">RemoteAddress</th>
+          <th id='headerPr' style="width: 10%">Protocol</th>
+          <th id='headerIn'>Info</th>
+        </tr>
+        </thead>
+
+      </table><div class="table-responsive" style="
+    height: 400px;
+">
+
+      <table id="packets" class="table table-striped">
+        <tbody>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="../../dist/js/bootstrap.min.js"></script>
+<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+<script src="../../assets/js/vendor/holder.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+<script type="text/javascript">
+  var systemInfos = "${systemInfos}";
+  var result = new Array();
+  <c:forEach items="${totalPackets}" var="packet">
+  var packet = new Object();
+  packet.protocol = "${packet.protocol}";
+  packet.localAddress = "${packet.localAddress}";
+  packet.remoteAddress = "${packet.remoteAddress}";
+  packet.flag = "${packet.flag}";
+  result.push(packet);
+  </c:forEach>
+
+  packets.startDetectPackets();
+</script>
+
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>

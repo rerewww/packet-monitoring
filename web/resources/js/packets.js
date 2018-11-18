@@ -3,7 +3,7 @@
  */
 var packets = {
     removePackets: function () {
-        var elemPackets = document.getElementById('packets');
+        var elemPackets = document.getElementById('packets').children[0];
         var LIMIT_CHILD_LENGTH = 100;
         for (var i = 0; i < LIMIT_CHILD_LENGTH; i++) {
             elemPackets.removeChild(elemPackets.firstChild);
@@ -11,19 +11,41 @@ var packets = {
     },
 
     showPackets : function (result) {
-        var elemPackets = document.getElementById('packets');
+        var elemPackets = document.getElementById('packets').children[0];
         if (elemPackets.childElementCount > 100) {
             this.removePackets();
         }
 
         var length = result.length;
         for (var i = 0; i < length; i++) {
-            var child = document.createElement('div');
-            var info = result[i].localPort + " -> " + result[i].remotePort + " [" + result[i].flag + "]" + " Length: " + result[i].size;
-            var packet = "[" + i + "]　　　" + result[i].localAddress + "　　　" + result[i].remoteAddress + "　　　" + result[i].protocol + "　　　" + info;
-            child.className = 'packet';
-            child.innerText = packet;
-            elemPackets.appendChild(child);
+            var packet = document.createElement('tr');
+            var number = document.createElement('td');
+            number.innerText = i;
+            viewStyle.setStyle(number, 'width', '10%');
+
+            var localAddress = document.createElement('td');
+            localAddress.innerText = result[i].localAddress;
+            viewStyle.setStyle(localAddress, 'width', '20%');
+
+            var remoteAddress = document.createElement('td');
+            remoteAddress.innerText = result[i].remoteAddress;
+            viewStyle.setStyle(remoteAddress, 'width', '20%');
+
+            var protocol = document.createElement('td');
+            protocol.innerText = result[i].protocol;
+            viewStyle.setStyle(protocol, 'width', '10%');
+
+            var infoText = result[i].localPort + " -> " + result[i].remotePort + " [" + result[i].flag + "]" + " Length: " + result[i].size;
+            var info = document.createElement('td');
+            info.innerText = infoText;
+
+            packet.appendChild(number);
+            packet.appendChild(localAddress);
+            packet.appendChild(remoteAddress);
+            packet.appendChild(protocol);
+            packet.appendChild(info);
+
+            elemPackets.appendChild(packet);
         }
     },
 
@@ -46,6 +68,6 @@ var packets = {
                     console.warn('error occurred: ', data.responseText);
                 }
             });
-        }.bind(this), 10000);
+        }.bind(this), 3000);
     }
 };
