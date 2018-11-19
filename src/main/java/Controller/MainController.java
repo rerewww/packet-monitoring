@@ -4,7 +4,9 @@ import Network.PacketContainer;
 import Service.NetworkService;
 import Service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,5 +40,17 @@ public class MainController {
     public String detect() throws IOException {
         networkService.analyze();
         return packetContainer.buildJsonArray().toString();
+    }
+
+    @RequestMapping("viewDevices")
+    public ModelAndView viewDevices() {
+        ModelAndView modelAndView = new ModelAndView("devices");
+        modelAndView.addObject("devices", networkService.getNetworkDevices());
+        return modelAndView;
+    }
+
+    @RequestMapping("/selectDevice")
+    public boolean selectDevice(@RequestParam(value = "id") final String id) {
+        return networkService.activityDevice(id);
     }
 }

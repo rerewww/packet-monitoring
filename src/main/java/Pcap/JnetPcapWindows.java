@@ -2,6 +2,7 @@ package Pcap;
 
 import Network.Packet;
 import Network.PacketContainer;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.Pcap;
@@ -25,6 +26,8 @@ public class JnetPcapWindows implements JnetPcacp {
     private PacketContainer packetContainer;
     @Setter
     private PcapIf device;
+    @Getter
+    private List<PcapIf> allDevices = new ArrayList<>();
 
     private static final int LOOP_VAL = 20; // 크기대로 패킷을 자른다.
     private static final int SNAP_LEN = 64 * 1024; // 크기대로 패킷을 자른다.
@@ -38,17 +41,20 @@ public class JnetPcapWindows implements JnetPcacp {
     }
 
     public JnetPcapWindows() {
-        List<PcapIf> allDevices = new ArrayList<>();
-
-        if (Pcap.findAllDevs(allDevices, ERROR_BUF) != Pcap.OK) {
+        if (Pcap.findAllDevs(this.allDevices, ERROR_BUF) != Pcap.OK) {
             log.warn("[Error]: " + ERROR_BUF.toString());
         }
+    }
 
-        for (PcapIf device : allDevices) {
-            String description = (device.getDescription() != null) ? device.getDescription() : "No description available";
-            log.info("[Network Device] : " + device.getName() + " " + description);
+    @Override
+    public boolean activityDevice(final String id) {
+        for (PcapIf device : this.allDevices) {
+            if (device.getName().equals(id)) {
+                setDevice(device);
+                return true;
+            }
         }
-        setDevice(allDevices.get(0));
+        return false;
     }
 
     /**
@@ -88,5 +94,15 @@ public class JnetPcapWindows implements JnetPcacp {
         }, null);
         pcap.close();
         return packetContainer;
+    }
+
+    @Override
+    public List<PcapIf> getNetworkDevices() {
+       return this.getAllDevices();
+    }
+
+    @Override
+    public boolean emptyDevice() {
+        return this.device == null;
     }
 }
