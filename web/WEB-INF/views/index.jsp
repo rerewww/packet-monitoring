@@ -11,7 +11,6 @@
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="icon" href="../../favicon.ico">
 
   <title>Dashboard Template for Bootstrap</title>
 
@@ -20,20 +19,11 @@
 
   <script type="text/javascript" src="/resources/js/packets.js"></script>
   <script type="text/javascript" src="/resources/js/style.js"></script>
+  <script type="text/javascript" src="/resources/js/devices.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- Custom styles for this template -->
   <link href="../../resources/css/dashboard.css" rel="stylesheet">
-
-  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
 </head>
 
 <body>
@@ -67,22 +57,10 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Reports</a></li>
+        <li class="active"><a href="/">Dashboard<span class="sr-only">(current)</span></a></li>
+        <li id="devices"><a href="/viewDevices">Devices</a></li>
         <li><a href="#">Analytics</a></li>
         <li><a href="#">Export</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item</a></li>
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
-        <li><a href="">More navigation</a></li>
-      </ul>
-      <ul class="nav nav-sidebar">
-        <li><a href="">Nav item again</a></li>
-        <li><a href="">One more nav</a></li>
-        <li><a href="">Another nav item</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -125,7 +103,7 @@
           <span class="text-muted">Something else</span>
         </div></div>
 
-      <h4 class="sub-header">Section title</h4>
+      <h4 class="sub-header">Packet Table</h4>
       <table class="table table-striped" style="
     margin-bottom: 0;">
         <thead>
@@ -152,27 +130,4 @@
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="../../assets/js/vendor/holder.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
-
-<script type="text/javascript">
-  var systemInfos = "${systemInfos}";
-  var result = new Array();
-  <c:forEach items="${totalPackets}" var="packet">
-  var packet = new Object();
-  packet.protocol = "${packet.protocol}";
-  packet.localAddress = "${packet.localAddress}";
-  packet.remoteAddress = "${packet.remoteAddress}";
-  packet.flag = "${packet.flag}";
-  result.push(packet);
-  </c:forEach>
-
-  packets.startDetectPackets();
-</script>
-
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>

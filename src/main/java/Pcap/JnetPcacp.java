@@ -1,6 +1,9 @@
 package Pcap;
 
 import Network.PacketContainer;
+import org.jnetpcap.PcapIf;
+
+import java.util.List;
 
 /**
  * Created by son on 2018-10-29.
@@ -11,4 +14,8 @@ public interface JnetPcacp {
      * @return
      */
     public PacketContainer analyze();
+
+    public List<PcapIf> getNetworkDevices();
+    public boolean activityDevice(final String id);
+    public boolean emptyDevice();
 }
