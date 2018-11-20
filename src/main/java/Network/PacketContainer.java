@@ -1,5 +1,6 @@
 package Network;
 
+import Network.model.Packet;
 import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONArray;
@@ -17,7 +18,11 @@ public class PacketContainer {
     @Getter @Setter private int totalConnect;
 
     public void setPackets(final Packet packet) {
-        packets.add(packet);
+        this.packets.add(packet);
+    }
+
+    public synchronized void clearPackets() {
+        this.packets.clear();
     }
 
     /**
@@ -26,7 +31,7 @@ public class PacketContainer {
      */
     public JSONArray buildJsonArray() {
         JSONArray jsonArray = new JSONArray();
-        for (Packet packet : packets) {
+        for (Packet packet : this.packets) {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("protocol", packet.getProtocol());
             jsonObject.put("localAddress", packet.getLocalAddress());

@@ -2,6 +2,7 @@
  * Created by son on 2018-11-19.
  */
 var devices = {
+    env : {},
     addDevices : function (devices) {
         devices.forEach(function (device) {
             var item = document.createElement('div');
@@ -33,16 +34,37 @@ var devices = {
             async: true,
             data: {'id': id},
             dataType: 'text',
-            success: function(data) {
-                if (data === null || data === undefined) {
+            success: function(response) {
+                if (response === null || response === undefined) {
                     console.warn('detecte packets is empty');
                     return;
                 }
-            },
-            error: function(data) {
                 alert("Connected...");
+            },
+            error: function(response) {
+                console.warn("error occurred : ", response);
+            }
+        });
+    },
+
+    checkDevice: function () {
+        $.ajax({
+            url: 'http://localhost:8080/checkDevice',
+            type:'GET',
+            async: false,
+            dataType: 'json',
+            success: function(response) {
+                if (response === null || response === undefined) {
+                    console.warn('detecte packets is empty');
+                    return;
+                }
+                if (!response.data) {
+                    return;
+                }
                 packets.startDetectPackets();
-                // console.warn("error occurred");
+            },
+            error: function(response) {
+                console.warn("error occurred : ", response.responseText);
             }
         });
     }

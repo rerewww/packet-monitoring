@@ -20,6 +20,7 @@
   <script type="text/javascript" src="/resources/js/packets.js"></script>
   <script type="text/javascript" src="/resources/js/style.js"></script>
   <script type="text/javascript" src="/resources/js/devices.js"></script>
+  <script type="text/javascript" src="/resources/js/domControl.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- Custom styles for this template -->
@@ -67,7 +68,6 @@
       <div class="row placeholders" style="
 ">
         <div class="col-xs-6 col-sm-3 placeholder">
-
           <h4>Label</h4>
           <span class="text-muted">Something else</span>
         </div>
@@ -77,17 +77,11 @@
           <span class="text-muted">Something else</span>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder">
-
           <h4>Label</h4>
           <span class="text-muted">Something else</span>
         </div>
-
       </div>
-
       <div class="row placeholders">
-
-
-
         <div class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
 ">
@@ -119,7 +113,6 @@
       </table><div class="table-responsive" style="
     height: 400px;
 ">
-
       <table id="packets" class="table table-striped">
         <tbody>
         </tbody>
@@ -127,7 +120,8 @@
     </div>
   </div>
 </div>
+<script>
+    devices.checkDevice();
+</script>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>

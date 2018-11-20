@@ -1,9 +1,7 @@
-package Network;
+package Network.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * Created by son on 2018-10-28.

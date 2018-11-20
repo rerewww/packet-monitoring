@@ -1,6 +1,6 @@
 package Pcap;
 
-import Network.Packet;
+import Network.model.Packet;
 import Network.PacketContainer;
 import lombok.Getter;
 import lombok.Setter;
@@ -93,6 +93,7 @@ public class JnetPcapWindows implements JnetPcacp {
             }
         }, null);
         pcap.close();
+        log.info("packetContainer 크기: " + packetContainer.getPackets().size());
         return packetContainer;
     }
 
