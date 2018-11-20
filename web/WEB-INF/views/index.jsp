@@ -1,11 +1,15 @@
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html lang="en"><head><style>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<html>
+<head>
+  <style>
   tr:hover td{
     background: #45E1E8;
   }
 </style>
 
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
@@ -21,6 +25,8 @@
   <script type="text/javascript" src="/resources/js/style.js"></script>
   <script type="text/javascript" src="/resources/js/devices.js"></script>
   <script type="text/javascript" src="/resources/js/domControl.js"></script>
+  <script type="text/javascript" src="/resources/js/chart.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
   <!-- Custom styles for this template -->
@@ -38,7 +44,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">Project name</a>
+      <a class="navbar-brand" style="font-weight: bold;" href="/">네트워크 모니터링</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -81,13 +87,9 @@
           <span class="text-muted">Something else</span>
         </div>
       </div>
-      <div class="row placeholders">
-        <div class="col-xs-6 col-sm-3 placeholder" style="
-    width: 50%;
-">
-          <img data-src="holder.js/200x200/auto/vine" class="img-responsive" alt="200x200" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxkZWZzLz48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzM5REJBQyIvPjxnPjx0ZXh0IHg9Ijc0LjA1NDY4NzUiIHk9IjEwMCIgc3R5bGU9ImZpbGw6IzFFMjkyQztmb250LXdlaWdodDpib2xkO2ZvbnQtZmFtaWx5OkFyaWFsLCBIZWx2ZXRpY2EsIE9wZW4gU2Fucywgc2Fucy1zZXJpZiwgbW9ub3NwYWNlO2ZvbnQtc2l6ZToxMHB0O2RvbWluYW50LWJhc2VsaW5lOmNlbnRyYWwiPjIwMHgyMDA8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+      <div class="row placeholders" style="margin-bottom: 0px">
+        <div class="col-xs-6 col-sm-3 placeholder" style="width: 50%;">
+          <canvas id="packetChart" height="320"></canvas>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
