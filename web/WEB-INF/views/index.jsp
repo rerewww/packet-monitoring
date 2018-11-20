@@ -127,6 +127,9 @@
     </div>
   </div>
 </div>
+<script>
+    devices.checkDevice();
+</script>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->

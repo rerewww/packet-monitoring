@@ -1,6 +1,6 @@
 package Pcap;
 
-import Network.Packet;
+import Network.model.Packet;
 import Network.PacketContainer;
 import lombok.Getter;
 import lombok.Setter;

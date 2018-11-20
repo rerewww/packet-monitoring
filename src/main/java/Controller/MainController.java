@@ -1,10 +1,10 @@
 package Controller;
 
 import Network.PacketContainer;
+import Network.model.AjaxModel;
 import Service.NetworkService;
 import Service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,9 +37,9 @@ public class MainController {
     }
 
     @RequestMapping("/detecting")
-    public String detect() throws IOException {
+    public AjaxModel detect() throws IOException {
         networkService.analyze();
-        return packetContainer.buildJsonArray().toString();
+        return new AjaxModel(true, "success", packetContainer.buildJsonArray().toString(), null);
     }
 
     @RequestMapping("viewDevices")
@@ -52,5 +52,11 @@ public class MainController {
     @RequestMapping("/selectDevice")
     public boolean selectDevice(@RequestParam(value = "id") final String id) {
         return networkService.activityDevice(id);
+    }
+
+    @RequestMapping("checkDevice")
+    public AjaxModel checkDevice() {
+        boolean result = networkService.checkDevice();
+        return new AjaxModel(true, "success", result, null);
     }
 }

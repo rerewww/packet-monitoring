@@ -55,17 +55,16 @@ var packets = {
                 url: 'http://localhost:8080/detecting',
                 type:'GET',
                 async: true,
-                dataType: 'text',
-                success: function(data) {
-                    if (data === null || data === undefined) {
+                dataType: 'json',
+                success: function(response) {
+                    if (response === null || response === undefined) {
                         console.warn('detecte packets is empty');
                         return;
                     }
-                    packets.showPackets(JSON.parse(data));
-                    viewStyle.resizePacketsScroll();
+                    packets.showPackets(JSON.parse(response.data));
                 },
-                error: function(data) {
-                    console.warn('error occurred: ', data.responseText);
+                error: function(response) {
+                    console.warn('error occurred: ', response.responseText);
                 }
             });
         }.bind(this), 3000);

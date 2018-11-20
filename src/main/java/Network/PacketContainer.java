@@ -1,5 +1,6 @@
 package Network;
 
+import Network.model.Packet;
 import lombok.Getter;
 import lombok.Setter;
 import org.json.JSONArray;
