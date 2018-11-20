@@ -1,6 +1,7 @@
 package Service;
 
 import Network.PacketContainer;
+import Network.model.Packet;
 import Pcap.JnetPcacp;
 import Pcap.JnetPcapFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +21,14 @@ import java.util.*;
 @Service
 public class NetworkService {
     private JnetPcapFactory jnetPcapFactory;
+    private PacketContainer packetContainer;
     private Map<String, Boolean> deviceList = new HashMap<>();
 
     @Autowired
-    public NetworkService(final JnetPcapFactory jnetPcapFactory) {
+    public NetworkService(final JnetPcapFactory jnetPcapFactory, final PacketContainer packetContainer) {
         this.jnetPcapFactory = jnetPcapFactory;
+        this.packetContainer = packetContainer;
+
         JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> pcapIfs = jnetPcacp.getNetworkDevices();
 
@@ -74,5 +78,9 @@ public class NetworkService {
             }
         }
         return false;
+    }
+
+    public void clearPackets() {
+        packetContainer.clearPackets();
     }
 }

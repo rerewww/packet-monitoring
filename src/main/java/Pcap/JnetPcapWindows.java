@@ -93,6 +93,7 @@ public class JnetPcapWindows implements JnetPcacp {
             }
         }, null);
         pcap.close();
+        log.info("packetContainer 크기: " + packetContainer.getPackets().size());
         return packetContainer;
     }
 

@@ -5,18 +5,17 @@ var packets = {
     removePackets: function () {
         var elemPackets = document.getElementById('packets').children[0];
         var LIMIT_CHILD_LENGTH = 100;
+        if (elemPackets.childElementCount < LIMIT_CHILD_LENGTH) {
+            return;
+        }
         for (var i = 0; i < LIMIT_CHILD_LENGTH; i++) {
             elemPackets.removeChild(elemPackets.firstChild);
         }
     },
 
     showPackets : function (result) {
-        var elemPackets = document.getElementById('packets').children[0];
-        if (elemPackets.childElementCount > 100) {
-            this.removePackets();
-        }
-
         var length = result.length;
+        var elemPackets = document.getElementById('packets').children[0];
         for (var i = 0; i < length; i++) {
             var packet = document.createElement('tr');
             var number = document.createElement('td');
@@ -61,7 +60,9 @@ var packets = {
                         console.warn('detecte packets is empty');
                         return;
                     }
+                    packets.removePackets();
                     packets.showPackets(JSON.parse(response.data));
+                    domControl.moveScroll();
                 },
                 error: function(response) {
                     console.warn('error occurred: ', response.responseText);
