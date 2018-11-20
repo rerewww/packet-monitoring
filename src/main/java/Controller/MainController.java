@@ -40,8 +40,9 @@ public class MainController {
     public AjaxModel detect() throws IOException {
         networkService.analyze();
         String result = packetContainer.buildJsonArray().toString();
+        int size = packetContainer.getPackets().size();
         networkService.clearPackets();
-        return new AjaxModel(true, "success", result, null);
+        return new AjaxModel(true, "success", result, size, null);
     }
 
     @RequestMapping("viewDevices")

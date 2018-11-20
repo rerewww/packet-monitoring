@@ -63,6 +63,7 @@ var packets = {
                     packets.removePackets();
                     packets.showPackets(JSON.parse(response.data));
                     domControl.moveScroll();
+                    chart.drawPacketChart(response.size);
                 },
                 error: function(response) {
                     console.warn('error occurred: ', response.responseText);

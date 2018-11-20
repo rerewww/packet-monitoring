@@ -12,5 +12,13 @@ public class AjaxModel {
     private Boolean success;
     private String message;
     private Object data;
+    private int size;
     private String exception;
+
+    public AjaxModel(Boolean success, String message, Object data, String exception) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
+        this.exception = exception;
+    }
 }
