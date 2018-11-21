@@ -1,17 +1,24 @@
-# 옵저버
-### 네트워크 분석
+Network Monitoring
+============
 
-[작업 예정]
-- ~~java config 클래스에서 bean 생성하도록 작업~~
-    - 리눅스 환경에서도 동작하도록
-- 서비스 - 프로세스 의존성 주입
-- log4j 설정
-- 파싱된 결과 웹 페이지로 뷰잉
-    - analyze 결과 단락 나누어서 출력
-    - 버튼 활용
+Documentation
+-------------
 
-#### 패킷
-- ~~코드 단에서 네트워크를 디텍딩하는 방법도 찾아보자~~
-- 총 패킷과 실시간 패킷을 나누어서 관리하도록 수정
-- 패킷 분석 속도 향상
-- 가져온 패킷 제거
+Personal network monitoring.
+
+It consists of a web-based interface and uses Spring MVC.
+
+Task
+----
+
+- Hex dump file analysis
+
+------------
+
+Requirements
+-------
+
+If you want to bootstrap Maven, you'll need:
+- Java 1.8+
+- Maven 3.0.5 or later
+
