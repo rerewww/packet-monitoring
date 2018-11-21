@@ -38,6 +38,11 @@ var packets = {
             var info = document.createElement('td');
             info.innerText = infoText;
 
+            packet.setAttribute('value', result[i].hexDump);
+            packet.onclick = function() {
+                document.getElementById('hexDumpInfo').innerText = window.event.target.parentElement.getAttribute('value');
+            }.bind(this);
+
             packet.appendChild(number);
             packet.appendChild(localAddress);
             packet.appendChild(remoteAddress);
@@ -61,7 +66,7 @@ var packets = {
                         return;
                     }
                     packets.removePackets();
-                    packets.showPackets(JSON.parse(response.data));
+                    packets.showPackets(response.data);
                     domControl.moveScroll();
                     chart.drawPacketChart(response.size);
                 },

@@ -21,9 +21,8 @@
     </appender>
 
     <root>
-        <level value="info"/>
+        <level value="debug"/>
         <appender-ref ref="STDOUT"/>
-        <appender-ref ref="FILEOUT"/>
     </root>
 
 </log4j:configuration>

@@ -39,10 +39,8 @@ public class MainController {
     @RequestMapping("/detecting")
     public AjaxModel detect() throws IOException {
         networkService.analyze();
-        String result = packetContainer.buildJsonArray().toString();
         int size = packetContainer.getPackets().size();
-        networkService.clearPackets();
-        return new AjaxModel(true, "success", result, size, null);
+        return new AjaxModel(true, "success", packetContainer.getPackets(), size, null);
     }
 
     @RequestMapping("viewDevices")
