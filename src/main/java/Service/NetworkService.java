@@ -1,7 +1,6 @@
 package Service;
 
 import Network.PacketContainer;
-import Network.model.Packet;
 import Pcap.JnetPcacp;
 import Pcap.JnetPcapFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +79,7 @@ public class NetworkService {
         return false;
     }
 
-    public void clearPackets() {
+    public synchronized void clearPackets() {
         packetContainer.clearPackets();
     }
 }

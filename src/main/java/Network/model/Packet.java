@@ -13,11 +13,12 @@ public class Packet {
     String protocol;
     String localAddress;
     String remoteAddress;
-    int localPort;
-    int remotePort;
     String flag;
     String pid;
     String processName;
+    String hexDump;
+    int localPort;
+    int remotePort;
     int size;
 
     public Packet(
@@ -27,7 +28,8 @@ public class Packet {
             final int localPort,
             final int remotePort,
             final String flag,
-            final int size
+            final int size,
+            final String hexDump
     ) {
         this.protocol = protocol;
         this.localAddress = localAddress;
@@ -36,5 +38,6 @@ public class Packet {
         this.remotePort = remotePort;
         this.flag = flag;
         this.size = size;
+        this.hexDump = hexDump;
     }
 }

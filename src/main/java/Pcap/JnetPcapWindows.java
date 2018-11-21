@@ -14,7 +14,6 @@ import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Tcp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class JnetPcapWindows implements JnetPcacp {
     @Getter
     private List<PcapIf> allDevices = new ArrayList<>();
 
-    private static final int LOOP_VAL = 20; // 크기대로 패킷을 자른다.
+    private static final int LOOP_VAL = 20;
     private static final int SNAP_LEN = 64 * 1024; // 크기대로 패킷을 자른다.
     private static final int FLAG = Pcap.MODE_NON_PROMISCUOUS;
     private static final int TIMEOUT = 10 * 1000; // ms
@@ -67,7 +66,6 @@ public class JnetPcapWindows implements JnetPcacp {
         Tcp tcp = new Tcp();
 
         Pcap pcap = Pcap.openLive(device.getName(), SNAP_LEN, FLAG, TIMEOUT, ERROR_BUF);
-
         pcap.loop(LOOP_VAL, new PcapPacketHandler<String>() {
             public void nextPacket(final PcapPacket pcapPacket, String user) {
                 if (pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
@@ -86,7 +84,8 @@ public class JnetPcapWindows implements JnetPcacp {
                                     localPort,
                                     remotePort,
                                     flag,
-                                    size
+                                    size,
+                                    pcapPacket.toHexdump()
                             )
                     );
                 }
