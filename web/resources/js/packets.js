@@ -39,6 +39,9 @@ var packets = {
             info.innerText = infoText;
 
             packet.setAttribute('value', result[i].hexDump);
+            if (result[i].protocol === 'Http') {
+                viewStyle.setStyle(packet, 'background-color', 'red');
+            }
             packet.onclick = function() {
                 document.getElementById('hexDumpInfo').innerText = window.event.target.parentElement.getAttribute('value');
             }.bind(this);
