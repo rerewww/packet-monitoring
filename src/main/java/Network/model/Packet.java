@@ -17,9 +17,12 @@ public class Packet {
     String pid;
     String processName;
     String hexDump;
+    String url;
     int localPort;
     int remotePort;
     int size;
+
+    public Packet() {}
 
     public Packet(
             final String protocol,

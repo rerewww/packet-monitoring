@@ -82,6 +82,13 @@ public class JnetPcapWindows implements JnetPcacp {
                             pcapPacket.toHexdump()
                     ));
                 }
+
+                if (pcapPacket.hasHeader(http)) {
+                    Packet packet = new Packet();
+                    packet.setProtocol(http.getName());
+                    packet.setUrl(http.fieldValue(Http.Request.Host)+ http.fieldValue(Http.Request.RequestUrl));
+                    packetContainer.setPackets(packet);
+                }
             }
         }, null);
         pcap.close();
