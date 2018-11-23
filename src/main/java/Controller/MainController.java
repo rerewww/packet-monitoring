@@ -4,7 +4,9 @@ import Network.PacketContainer;
 import Network.model.AjaxModel;
 import Service.NetworkService;
 import Service.SystemService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,7 +18,8 @@ import java.io.IOException;
  * Created by son on 2018-10-28.
  */
 
-@RestController
+@Slf4j
+@RestController(value = "/network")
 public class MainController {
     private PacketContainer packetContainer;
     private NetworkService networkService;
@@ -29,7 +32,7 @@ public class MainController {
         this.systemService = systemService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping("/network")
     public ModelAndView analyze() throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", systemService.getSystemOsName());

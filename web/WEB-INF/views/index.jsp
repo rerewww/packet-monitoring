@@ -26,8 +26,8 @@
   <script type="text/javascript" src="/resources/js/devices.js"></script>
   <script type="text/javascript" src="/resources/js/domControl.js"></script>
   <script type="text/javascript" src="/resources/js/chart.js"></script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/resources/js/lib/chart.bundle.min.js"></script>
+  <script src="/resources/js/lib/jquery.3.3.1.js"></script>
 
   <!-- Custom styles for this template -->
   <link href="../../resources/css/dashboard.css" rel="stylesheet">
@@ -44,7 +44,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" style="font-weight: bold;" href="/">네트워크 모니터링</a>
+      <a class="navbar-brand" style="font-weight: bold;" href="/network">네트워크 모니터링</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
@@ -64,7 +64,7 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
-        <li class="active"><a href="/">Dashboard<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="/network">Dashboard<span class="sr-only">(current)</span></a></li>
         <li id="devices"><a href="/viewDevices">Devices</a></li>
         <li><a href="#">Analytics</a></li>
         <li><a href="#">Export</a></li>

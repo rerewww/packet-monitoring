@@ -5,7 +5,7 @@ import Pcap.JnetPcapWindows;
 import Network.PacketContainer;
 import aop.DetectPacketAop;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,6 +15,17 @@ import org.springframework.context.annotation.Configuration;
 @Slf4j
 @Configuration
 public class BeanConfig {
+    @Value("#{serverXmlFile['admin.username']}") private String admin;
+    @Value("#{serverXmlFile['admin.password']}") private String adminPassword;
+
+    @Bean
+    public ServerProperties serverProperties() {
+        ServerProperties serverProperties = new ServerProperties();
+        serverProperties.setAdmin(this.admin);
+        serverProperties.setAdminPassword(this.adminPassword);
+        return serverProperties;
+    }
+
     @Bean
     public DetectPacketAop detectPacketAop() {
         return new DetectPacketAop();

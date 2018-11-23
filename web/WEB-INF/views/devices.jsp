@@ -15,15 +15,15 @@
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <script type="text/javascript" src="/resources/js/packets.js"></script>
     <script type="text/javascript" src="/resources/js/style.js"></script>
     <script type="text/javascript" src="/resources/js/devices.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/resources/js/lib/jquery.3.3.1.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="../../resources/css/dashboard.css" rel="stylesheet">
+    <link href="/resources/css/dashboard.css" rel="stylesheet">
 </head>
 
 <body>
@@ -57,7 +57,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="/">Dashboard<span class="sr-only">(current)</span></a></li>
+                <li class="active"><a href="/network">Dashboard<span class="sr-only">(current)</span></a></li>
                 <li><a href="#">Devices</a></li>
                 <li><a href="#">Analytics</a></li>
                 <li><a href="#">Export</a></li>
