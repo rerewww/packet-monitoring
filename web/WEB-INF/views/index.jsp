@@ -26,6 +26,7 @@
   <script type="text/javascript" src="/resources/js/devices.js"></script>
   <script type="text/javascript" src="/resources/js/domControl.js"></script>
   <script type="text/javascript" src="/resources/js/chart.js"></script>
+  <script type="text/javascript" src="/resources/js/setting.js"></script>
   <script type="text/javascript" src="/resources/js/lib/chart.bundle.min.js"></script>
   <script src="/resources/js/lib/jquery.3.3.1.js"></script>
 
@@ -73,14 +74,27 @@
           <h4>CPU(%)</h4>
           <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="col-xs-6 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row;">
+          <div class="switchHeader">Cpu</div>
+          <label class="switch">
+            <input id="cpuCheck" type="checkbox" onclick="setting.onToggleCpuEvent()">
+            <span class="slider"></span>
+          </label>
 
-          <h4>Label</h4>
-          <span class="text-muted">Something else</span>
+          <div class="switchHeader">Graph</div>
+          <label class="switch">
+            <input id="graphCheck" type="checkbox" onclick="setting.onTogglePacketEvent()">
+            <span class="slider"></span>
+          </label>
+
+          <div class="switchHeader">Packets</div>
+          <label class="switch">
+            <input id="packetsCheck" type="checkbox" onclick="setting.onTogglePacketEvent()">
+            <span class="slider"></span>
+          </label>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder">
           <h4>Label</h4>
-          <span class="text-muted">Something else</span>
         </div>
       </div>
       <div class="row placeholders" style="margin-bottom: 0px">
@@ -100,7 +114,7 @@
         <thead>
         <tr>
           <th id='headerNum' style="width: 10%">Number</th>
-          <th id='headerLa' style="width: 20%">LocalAddress</thi>
+          <th id='headerLa' style="width: 20%">LocalAddress</th>
           <th id='headerRe' style="width: 20%">RemoteAddress</th>
           <th id='headerPr' style="width: 10%">Protocol</th>
           <th id='headerIn'>Info</th>
@@ -119,7 +133,6 @@
 </div>
 <script>
     devices.checkDevice();
-    devices.startCpuAmount();
 </script>
 
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>

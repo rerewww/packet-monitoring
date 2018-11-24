@@ -79,10 +79,10 @@
 
     <div class="container">
         <label><b>Username</b></label>
-        <input name="id" type="text" placeholder="Enter Username" value="admin" required="">
+        <input name="id" type="text" placeholder="Enter Username" required="">
 
         <label><b>Password</b></label>
-        <input name="password" type="password" placeholder="Enter Password" value="admin" required="">
+        <input name="password" type="password" placeholder="Enter Password" required="">
 
         <button type="submit">Login</button>
     </div>

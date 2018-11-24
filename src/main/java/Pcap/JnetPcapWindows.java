@@ -29,7 +29,7 @@ public class JnetPcapWindows implements JnetPcacp {
     @Getter
     private List<PcapIf> allDevices = new ArrayList<>();
 
-    private static final int LOOP_VAL = 30;
+    private static final int LOOP_VAL = 20;
     private static final int SNAP_LEN = 64 * 1024; // 크기대로 패킷을 자른다.
     private static final int FLAG = Pcap.MODE_NON_PROMISCUOUS;
     private static final int TIMEOUT = 10 * 1000; // ms

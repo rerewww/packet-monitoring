@@ -56,8 +56,18 @@ var packets = {
         }
     },
 
-    startDetectPackets: function () {
-        setInterval(function () {
+    startDetectPackets: function (id) {
+        if (!id) {
+            if (!$('input[id=graphCheck]').is(":checked")) {
+                $('input[id=graphCheck]').trigger('click');
+            }
+            if (!$('input[id=packetsCheck]').is(":checked")) {
+                $('input[id=packetsCheck]').trigger('click');
+            }
+        }
+        console.log("call detect");
+
+        setting.clearIdMap.detectCheck = setInterval(function () {
             $.ajax({
                 url: '/network/detect',
                 type:'GET',
@@ -69,14 +79,20 @@ var packets = {
                         return;
                     }
                     packets.removePackets();
-                    packets.showPackets(response.data);
+                    if ($('input[id=packetsCheck]').is(":checked")) {
+                        packets.showPackets(response.data);
+                    }
+
                     domControl.moveScroll();
-                    chart.drawPacketChart(response.size);
+
+                    if ($('input[id=graphCheck]').is(":checked")) {
+                        chart.drawPacketChart(response.size);
+                    }
                 },
                 error: function(response) {
                     console.warn('error occurred: ', response.responseText);
                 }
             });
-        }.bind(this), 3000);
+        }.bind(this), 10000);
     }
 };
