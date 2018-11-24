@@ -2,9 +2,12 @@
  * Created by son on 2018-11-19.
  */
 var devices = {
-    env : {},
     startCpuAmount: function () {
-        setInterval(function () {
+        if (!$('input[id=cpuCheck]').is(':checked')) {
+            $('input[id=cpuCheck]').trigger('click');
+        }
+
+        setting.clearIdMap.cpuCheck = setInterval(function () {
             $.ajax({
                 url: '/network/cpuAmount',
                 type:'GET',
@@ -21,7 +24,7 @@ var devices = {
                     console.warn('error occurred: ', response.responseText);
                 }
             });
-        }.bind(this), 10000);
+        }.bind(this), 5000);
     },
 
     addDevices : function (devices) {
@@ -68,7 +71,7 @@ var devices = {
         });
     },
 
-    checkDevice: function () {
+    checkDevice: function (id) {
         $.ajax({
             url: '/network/checkDevice',
             type:'GET',
@@ -82,7 +85,7 @@ var devices = {
                 if (!response.data) {
                     return;
                 }
-                packets.startDetectPackets();
+                packets.startDetectPackets(id);
             },
             error: function(response) {
                 console.warn("error occurred : ", response.responseText);
