@@ -3,10 +3,11 @@ package Controller;
 import Network.PacketContainer;
 import Network.model.AjaxModel;
 import Service.NetworkService;
-import Service.SystemService;
+import Service.WindowSystemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,29 +22,32 @@ import java.io.IOException;
 @RestController
 @RequestMapping(value = "/network")
 public class MainController {
-    private PacketContainer packetContainer;
     private NetworkService networkService;
-    private SystemService systemService;
+    private WindowSystemService windowSystemService;
 
     @Autowired
-    public MainController(final PacketContainer packetContainer, final NetworkService networkService, final SystemService systemService) {
-        this.packetContainer = packetContainer;
+    public MainController(final NetworkService networkService, final WindowSystemService windowSystemService) {
         this.networkService = networkService;
-        this.systemService = systemService;
+        this.windowSystemService = windowSystemService;
     }
 
     @RequestMapping()
     public ModelAndView analyze() throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
-        modelAndView.addObject("systemInfos", systemService.getSystemOsName());
+        modelAndView.addObject("systemInfos", windowSystemService.getSystemOsName());
         return modelAndView;
     }
 
     @RequestMapping("/detect")
     public AjaxModel detect() throws IOException {
-        networkService.analyze();
-        int size = packetContainer.getPackets().size();
-        return new AjaxModel(true, "success", packetContainer.getPackets(), size, null);
+        PacketContainer packetContainer = networkService.analyze();
+        return new AjaxModel(
+                true,
+                "detect",
+                packetContainer.getPackets(),
+                packetContainer.getPackets().size(),
+                null
+        );
     }
 
     @RequestMapping("/viewDevices")
@@ -62,5 +66,18 @@ public class MainController {
     public AjaxModel checkDevice() {
         boolean result = networkService.checkDevice();
         return new AjaxModel(true, "success", result, null);
+    }
+
+    @RequestMapping(value = "/processName", method = RequestMethod.POST)
+    public AjaxModel processNameFormPort(@RequestParam(value = "port") final int port) {
+        String processName = "";
+        try {
+            String pid = windowSystemService.getProcessIdFromPort(port);
+            processName = windowSystemService.getProcessNameFromPid(pid);
+        } catch (IOException e) {
+            log.warn(e.getMessage(), e);
+        }
+
+        return new AjaxModel(true, "processName", processName);
     }
 }

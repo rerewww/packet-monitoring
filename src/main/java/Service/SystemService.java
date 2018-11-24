@@ -1,13 +1,13 @@
 package Service;
 
-import org.springframework.stereotype.Service;
+import java.io.IOException;
 
 /**
- * Created by son on 2018-11-12.
+ * Created by son on 2018-11-24.
  */
-@Service
-public class SystemService {
-    public String getSystemOsName() {
-        return System.getProperty("os.name");
-    }
+public interface SystemService {
+    public String getSystemOsName();
+    public String getProcessIdFromPort(final int port) throws IOException;
+    public String getProcessNameFromPid(final String pid) throws IOException;
+    public StringBuilder executeCommand(final String[] command) throws IOException;
 }

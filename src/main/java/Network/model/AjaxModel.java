@@ -25,4 +25,8 @@ public class AjaxModel {
     public AjaxModel(Boolean success) {
         this(success, "login", null, "");
     }
+
+    public AjaxModel(Boolean success, String message, Object data) {
+        this(success, message, data, "");
+    }
 }
