@@ -3,6 +3,27 @@
  */
 var devices = {
     env : {},
+    startCpuAmount: function () {
+        setInterval(function () {
+            $.ajax({
+                url: '/network/cpuAmount',
+                type:'GET',
+                async: true,
+                dataType: 'json',
+                success: function(response) {
+                    if (response === null || response === undefined) {
+                        console.warn('Failed get cpu amount');
+                        return;
+                    }
+                    chart.drawCpucpuAmount(response.data);
+                },
+                error: function(response) {
+                    console.warn('error occurred: ', response.responseText);
+                }
+            });
+        }.bind(this), 10000);
+    },
+
     addDevices : function (devices) {
         devices.forEach(function (device) {
             var item = document.createElement('div');

@@ -1,11 +1,13 @@
 package Service;
 
+import com.sun.management.OperatingSystemMXBean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
 
 /**
  * Created by son on 2018-11-12.
@@ -60,6 +62,22 @@ public class WindowSystemService implements SystemService {
         }
         process.destroy();
         return result;
+    }
+
+    @Override
+    public int getCpuAmount() {
+        OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean)ManagementFactory.getOperatingSystemMXBean();
+        int average = 0;
+
+        while (average <= 0.0) {
+            average = (int)Math.round(operatingSystemMXBean.getSystemCpuLoad() * 100.0);
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return average;
     }
 
     private String[] getCommand(final String cmd) {

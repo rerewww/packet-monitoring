@@ -21,12 +21,12 @@ import java.io.IOException;
 @Slf4j
 @RestController
 @RequestMapping(value = "/network")
-public class MainController {
+public class NetworkController {
     private NetworkService networkService;
     private WindowSystemService windowSystemService;
 
     @Autowired
-    public MainController(final NetworkService networkService, final WindowSystemService windowSystemService) {
+    public NetworkController(final NetworkService networkService, final WindowSystemService windowSystemService) {
         this.networkService = networkService;
         this.windowSystemService = windowSystemService;
     }
@@ -79,5 +79,10 @@ public class MainController {
         }
 
         return new AjaxModel(true, "processName", processName);
+    }
+
+    @RequestMapping("/cpuAmount")
+    public AjaxModel cpuAmout() {
+        return new AjaxModel(true, "cpuAmount", windowSystemService.getCpuAmount());
     }
 }

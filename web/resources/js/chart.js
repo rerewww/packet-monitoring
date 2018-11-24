@@ -1,6 +1,17 @@
 var chart = {
     data: [],
     labels: [],
+    drawCpucpuAmount: function (data) {
+        var spanText = document.getElementById('cpuAmount');
+        var deegres = 0;
+        var acrInterval = setInterval (function() {
+            spanText.innerHTML = (++deegres).toFixed();
+            if( deegres >= data) {
+                clearInterval(acrInterval);
+            }
+        }, 15);
+    },
+
     drawPacketChart: function(packetsSize) {
         var ctx = document.getElementById("packetChart").getContext('2d');
         var date = new Date();
