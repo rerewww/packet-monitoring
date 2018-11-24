@@ -72,20 +72,19 @@
 
 <h2 style="text-align: center;">Login</h2>
 
-<form>
+<form action="/login" method="post">
     <div class="imgcontainer">
         <img src="/resources/images/monitor.png" class="avatar"/>
     </div>
 
     <div class="container">
         <label><b>Username</b></label>
-        <input id="id" type="text" placeholder="Enter Username" required="">
+        <input name="id" type="text" placeholder="Enter Username" value="admin" required="">
 
         <label><b>Password</b></label>
-        <input id="password" type="password" placeholder="Enter Password" required="">
+        <input name="password" type="password" placeholder="Enter Password" value="admin" required="">
 
-        <button type="submit" onclick="admin.login()">Login</button>
-
+        <button type="submit">Login</button>
     </div>
 </form>
 </body>

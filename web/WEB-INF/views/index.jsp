@@ -51,7 +51,7 @@
         <li><a href="#">Dashboard</a></li>
         <li><a href="#">Settings</a></li>
         <li><a href="#">Profile</a></li>
-        <li><a href="#">Help</a></li>
+        <li><a href="/logout">Logout</a></li>
       </ul>
       <form class="navbar-form navbar-right">
         <input type="text" class="form-control" placeholder="Search...">
@@ -65,7 +65,7 @@
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar">
         <li class="active"><a href="/network">Dashboard<span class="sr-only">(current)</span></a></li>
-        <li id="devices"><a href="/viewDevices">Devices</a></li>
+        <li id="devices"><a href="/network/viewDevices">Devices</a></li>
         <li><a href="#">Analytics</a></li>
         <li><a href="#">Export</a></li>
       </ul>

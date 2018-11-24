@@ -21,6 +21,14 @@
     <context:component-scan base-package="Config" />
     <context:component-scan base-package="Pcap" />
 
+
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/network"/>
+            <bean id="CertificationInterceptor" class="interceptor.CertificationInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <aop:aspectj-autoproxy/>
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>

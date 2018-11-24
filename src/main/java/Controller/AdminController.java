@@ -1,15 +1,14 @@
 package Controller;
 
-import Network.model.AjaxModel;
 import Service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by son on 2018-11-23.
@@ -24,17 +23,31 @@ public class AdminController {
     }
 
     @RequestMapping("/")
-    public ModelAndView loginPage() {
-        return new ModelAndView("login");
+    public String loginPage() {
+        return "login";
     }
 
-    @ResponseBody
+    @RequestMapping("/logout")
+    public String logout(final HttpSession session) {
+        if (!StringUtils.isEmpty(session.getAttribute("login"))) {
+            session.removeAttribute("login");
+        }
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public AjaxModel login(
+    public String login(
+            final HttpSession session,
             @RequestParam(value = "id") final String id,
             @RequestParam(value = "password") final String password
     ) {
-        boolean result = adminService.login(id, password);
-        return new AjaxModel(result);
+        if (!StringUtils.isEmpty(session.getAttribute("login"))) {
+            session.removeAttribute("login");
+        }
+
+        if (adminService.login(id, password)) {
+            session.setAttribute("login", id);
+        }
+        return "redirect:/network";
     }
 }
