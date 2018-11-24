@@ -4,6 +4,7 @@ import Network.PacketContainer;
 import Network.model.AjaxModel;
 import Service.NetworkService;
 import Service.SystemService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,9 @@ import java.io.IOException;
  * Created by son on 2018-10-28.
  */
 
+@Slf4j
 @RestController
+@RequestMapping(value = "/network")
 public class MainController {
     private PacketContainer packetContainer;
     private NetworkService networkService;
@@ -29,21 +32,21 @@ public class MainController {
         this.systemService = systemService;
     }
 
-    @RequestMapping("/")
+    @RequestMapping()
     public ModelAndView analyze() throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", systemService.getSystemOsName());
         return modelAndView;
     }
 
-    @RequestMapping("/detecting")
+    @RequestMapping("/detect")
     public AjaxModel detect() throws IOException {
         networkService.analyze();
         int size = packetContainer.getPackets().size();
         return new AjaxModel(true, "success", packetContainer.getPackets(), size, null);
     }
 
-    @RequestMapping("viewDevices")
+    @RequestMapping("/viewDevices")
     public ModelAndView viewDevices() {
         ModelAndView modelAndView = new ModelAndView("devices");
         modelAndView.addObject("devices", networkService.getNetworkDevices());
@@ -55,7 +58,7 @@ public class MainController {
         return networkService.activityDevice(id);
     }
 
-    @RequestMapping("checkDevice")
+    @RequestMapping("/checkDevice")
     public AjaxModel checkDevice() {
         boolean result = networkService.checkDevice();
         return new AjaxModel(true, "success", result, null);

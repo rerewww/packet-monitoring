@@ -29,7 +29,7 @@ var devices = {
 
     selectDevice: function (id) {
         $.ajax({
-            url: 'http://localhost:8080/selectDevice',
+            url: '/network/selectDevice',
             type:'GET',
             async: true,
             data: {'id': id},
@@ -49,7 +49,7 @@ var devices = {
 
     checkDevice: function () {
         $.ajax({
-            url: 'http://localhost:8080/checkDevice',
+            url: '/network/checkDevice',
             type:'GET',
             async: false,
             dataType: 'json',

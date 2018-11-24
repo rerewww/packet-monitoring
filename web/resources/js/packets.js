@@ -59,7 +59,7 @@ var packets = {
     startDetectPackets: function () {
         setInterval(function () {
             $.ajax({
-                url: 'http://localhost:8080/detecting',
+                url: '/network/detect',
                 type:'GET',
                 async: true,
                 dataType: 'json',

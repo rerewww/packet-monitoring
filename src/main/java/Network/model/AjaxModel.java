@@ -21,4 +21,8 @@ public class AjaxModel {
         this.data = data;
         this.exception = exception;
     }
+
+    public AjaxModel(Boolean success) {
+        this(success, "login", null, "");
+    }
 }
