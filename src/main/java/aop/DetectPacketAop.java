@@ -15,13 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class DetectPacketAop {
     @Autowired NetworkService networkService;
 
-    @Before("execution(* Controller.MainController.detect())")
+    @Before("execution(* Controller.NetworkController.detect())")
     public void startDetectController() {
         networkService.clearPackets();
         log.info("[Called] Detecting request from client");
     }
 
-    @After("execution(* Controller.MainController.detect())")
+    @After("execution(* Controller.NetworkController.detect())")
     public void updatePacketsDatabase() {
         log.info("[Update database] update packets to database");
     }

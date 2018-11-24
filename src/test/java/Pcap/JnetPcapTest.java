@@ -2,10 +2,10 @@ package Pcap;
 
 import Network.PacketContainer;
 import lombok.extern.slf4j.Slf4j;
+import org.jnetpcap.PcapIf;
 import org.junit.Before;
 import org.junit.Test;
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import java.util.List;
 
 /**
  * Created by son on 2018-11-11.
@@ -27,8 +27,8 @@ public class JnetPcapTest {
 
     @Test
     public void analyzeTest() {
-        PacketContainer packetContainer = jnetPcacp.analyze();
-//        System.out.println(packetContainer.buildJsonArray().toString());
-        assertThat(packetContainer.getPackets().size(), is(20));
+        List<PcapIf> pcapIfList = jnetPcacp.getNetworkDevices();
+        // pcacpIfList에서 사용 할 디바이스를 activityDevice를 호출하여 설정한다.
+        // analyze 호출한다.
     }
 }
