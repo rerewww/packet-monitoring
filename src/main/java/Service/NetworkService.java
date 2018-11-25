@@ -19,14 +19,12 @@ import java.util.*;
 @Slf4j
 @Service
 public class NetworkService {
-    private JnetPcapFactory jnetPcapFactory;
+    private JnetPcacp jnetPcacp;
     private Map<String, Boolean> deviceList = new HashMap<>();
 
     @Autowired
     public NetworkService(final JnetPcapFactory jnetPcapFactory) {
-        this.jnetPcapFactory = jnetPcapFactory;
-
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
+        this.jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> pcapIfs = jnetPcacp.getNetworkDevices();
 
         for (PcapIf pcapIf : pcapIfs) {
@@ -35,12 +33,10 @@ public class NetworkService {
     }
 
     public PacketContainer analyze() throws IOException {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         return jnetPcacp.analyze(new PacketContainer());
     }
 
     public JSONArray getNetworkDevices() {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> devices = jnetPcacp.getNetworkDevices();
 
         JSONArray jsonArray = new JSONArray();
@@ -54,7 +50,6 @@ public class NetworkService {
     }
 
     public boolean activityDevice(final String id) {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         if (!jnetPcacp.activityDevice(id)) {
             return false;
         }
@@ -63,7 +58,6 @@ public class NetworkService {
     }
 
     public String getActiveDevice() {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         String id = "";
         for (Map.Entry<String, Boolean> device : deviceList.entrySet()) {
             if (!device.getValue()) {
@@ -80,7 +74,6 @@ public class NetworkService {
     }
 
     public boolean isEmptyDevice() {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         return jnetPcacp.emptyDevice();
     }
 
