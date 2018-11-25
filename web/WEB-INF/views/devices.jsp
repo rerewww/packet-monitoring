@@ -42,7 +42,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/network">Dashboard</a></li>
-                <li class="active"><a href="/network/viewDevices">Settings</a></li>
+                <li class="active"><a href="/network/viewDevices">Devices</a></li>
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Logout</a></li>
             </ul>
