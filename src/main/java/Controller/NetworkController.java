@@ -38,6 +38,7 @@ public class NetworkController {
     public ModelAndView analyze() throws IOException {
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", windowSystemService.getSystemOsName());
+        modelAndView.addObject("id", networkService.getActiveDevice());
         return modelAndView;
     }
 

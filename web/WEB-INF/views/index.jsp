@@ -114,7 +114,16 @@
         </div>
       </div>
 
-      <h4 class="sub-header">Packet Table</h4>
+      <h4 class="sub-header">
+        <c:choose>
+          <c:when test="${id ne ''}">
+              ${id}
+          </c:when>
+          <c:otherwise>
+              Select network device...
+          </c:otherwise>
+        </c:choose>
+      </h4>
       <table class="table table-striped" style="
     margin-bottom: 0;">
         <thead>

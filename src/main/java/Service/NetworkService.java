@@ -62,15 +62,32 @@ public class NetworkService {
         return true;
     }
 
+    public String getActiveDevice() {
+        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
+        String id = "";
+        for (Map.Entry<String, Boolean> device : deviceList.entrySet()) {
+            if (!device.getValue()) {
+                continue;
+            }
+            for (PcapIf pcapIf : jnetPcacp.getNetworkDevices()) {
+                if (!pcapIf.getName().equals(device.getKey())) {
+                    continue;
+                }
+                id = pcapIf.getDescription();
+            }
+        }
+        return id;
+    }
+
     public boolean isEmptyDevice() {
         JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         return jnetPcacp.emptyDevice();
     }
 
     public boolean checkDevice() {
-        for (Map.Entry<String, Boolean> a : deviceList.entrySet()) {
-            if (a.getValue()) {
-                log.info("디바이스: " + a.getKey() + " 활성화 상태: " + a.getValue());
+        for (Map.Entry<String, Boolean> device : deviceList.entrySet()) {
+            if (device.getValue()) {
+                log.info("device: " + device.getKey() + " status: " + device.getValue());
                 return true;
             }
         }
