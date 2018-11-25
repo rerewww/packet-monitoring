@@ -32,14 +32,8 @@ public class BeanConfig {
     }
 
     @Bean
-    public PacketContainer packetContainer() {
-        return new PacketContainer();
-    }
-
-    @Bean
     public JnetPcapWindows jnetPcapWindows() {
         JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
-        jnetPcapWindows.setPacketContainer(this.packetContainer());
         return jnetPcapWindows;
     }
 

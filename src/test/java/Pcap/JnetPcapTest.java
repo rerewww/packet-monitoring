@@ -1,6 +1,5 @@
 package Pcap;
 
-import Network.PacketContainer;
 import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.PcapIf;
 import org.junit.Before;
@@ -16,9 +15,7 @@ public class JnetPcapTest {
 
     @Before
     public void setUp() {
-        PacketContainer packetContainer = new PacketContainer();
         JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
-        jnetPcapWindows.setPacketContainer(packetContainer);
 
         JnetPcapFactory jnetPcapFactory = new JnetPcapFactory();
         jnetPcapFactory.setJnetPcapWindows(jnetPcapWindows);

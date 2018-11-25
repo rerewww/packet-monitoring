@@ -13,7 +13,6 @@ import org.jnetpcap.packet.format.FormatUtils;
 import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Tcp;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +22,6 @@ import java.util.List;
  */
 @Slf4j
 public class JnetPcapWindows implements JnetPcacp {
-    private PacketContainer packetContainer;
     @Setter
     private PcapIf device;
     @Getter
@@ -34,11 +32,6 @@ public class JnetPcapWindows implements JnetPcacp {
     private static final int FLAG = Pcap.MODE_NON_PROMISCUOUS;
     private static final int TIMEOUT = 10 * 1000; // ms
     private static final StringBuilder ERROR_BUF = new StringBuilder();
-
-    @Autowired
-    public void setPacketContainer(final PacketContainer packetContainer) {
-        this.packetContainer = packetContainer;
-    }
 
     public JnetPcapWindows() {
         if (Pcap.findAllDevs(this.allDevices, ERROR_BUF) != Pcap.OK) {
@@ -62,7 +55,7 @@ public class JnetPcapWindows implements JnetPcacp {
      * @return PacketContainer
      */
     @Override
-    public PacketContainer analyze() {
+    public PacketContainer analyze(final PacketContainer packetContainer) {
         Ip4 ip4 = new Ip4();
         Tcp tcp = new Tcp();
         Http http = new Http();

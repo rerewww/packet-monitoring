@@ -20,13 +20,11 @@ import java.util.*;
 @Service
 public class NetworkService {
     private JnetPcapFactory jnetPcapFactory;
-    private PacketContainer packetContainer;
     private Map<String, Boolean> deviceList = new HashMap<>();
 
     @Autowired
-    public NetworkService(final JnetPcapFactory jnetPcapFactory, final PacketContainer packetContainer) {
+    public NetworkService(final JnetPcapFactory jnetPcapFactory) {
         this.jnetPcapFactory = jnetPcapFactory;
-        this.packetContainer = packetContainer;
 
         JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> pcapIfs = jnetPcacp.getNetworkDevices();
@@ -38,7 +36,7 @@ public class NetworkService {
 
     public PacketContainer analyze() throws IOException {
         JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
-        return jnetPcacp.analyze();
+        return jnetPcacp.analyze(new PacketContainer());
     }
 
     public JSONArray getNetworkDevices() {
@@ -77,9 +75,5 @@ public class NetworkService {
             }
         }
         return false;
-    }
-
-    public synchronized void clearPackets() {
-        packetContainer.clearPackets();
     }
 }

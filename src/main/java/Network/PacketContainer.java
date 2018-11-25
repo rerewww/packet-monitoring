@@ -3,6 +3,7 @@ package Network;
 import Network.model.Packet;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by son on 2018-10-28.
  */
+@Slf4j
 public class PacketContainer {
     @Getter public List<Packet> packets = new ArrayList<>();
     @Getter @Setter private int totalListen;
@@ -19,10 +21,6 @@ public class PacketContainer {
 
     public void setPackets(final Packet packet) {
         this.packets.add(packet);
-    }
-
-    public synchronized void clearPackets() {
-        this.packets.clear();
     }
 
     /**
