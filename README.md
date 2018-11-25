@@ -1,5 +1,5 @@
 Network Monitoring
-============
+==================
 
 Documentation
 -------------
@@ -8,15 +8,19 @@ Personal network monitoring.
 
 It consists of a web-based interface and uses Spring MVC.
 
-Task
-----
 
-- Hex dump file analysis
+Quick Build
+-----------
 
-------------
+1. Run Maven
+```
+mvn clean package
+```
+2. Deploy to tomcat
+
 
 Requirements
--------
+-----------
 
 If you want to bootstrap Maven, you'll need:
 - Java 1.8+
