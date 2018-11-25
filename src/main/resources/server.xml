@@ -3,4 +3,5 @@
 <properties>
     <entry key="admin.username">admin</entry>
     <entry key="admin.password">admin</entry>
+    <entry key="detect.loop">20</entry>
 </properties>
