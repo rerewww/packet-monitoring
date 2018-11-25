@@ -19,16 +19,12 @@ import java.util.*;
 @Slf4j
 @Service
 public class NetworkService {
-    private JnetPcapFactory jnetPcapFactory;
-    private PacketContainer packetContainer;
+    private JnetPcacp jnetPcacp;
     private Map<String, Boolean> deviceList = new HashMap<>();
 
     @Autowired
-    public NetworkService(final JnetPcapFactory jnetPcapFactory, final PacketContainer packetContainer) {
-        this.jnetPcapFactory = jnetPcapFactory;
-        this.packetContainer = packetContainer;
-
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
+    public NetworkService(final JnetPcapFactory jnetPcapFactory) {
+        this.jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> pcapIfs = jnetPcacp.getNetworkDevices();
 
         for (PcapIf pcapIf : pcapIfs) {
@@ -37,12 +33,10 @@ public class NetworkService {
     }
 
     public PacketContainer analyze() throws IOException {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
-        return jnetPcacp.analyze();
+        return jnetPcacp.analyze(new PacketContainer());
     }
 
     public JSONArray getNetworkDevices() {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> devices = jnetPcacp.getNetworkDevices();
 
         JSONArray jsonArray = new JSONArray();
@@ -56,7 +50,6 @@ public class NetworkService {
     }
 
     public boolean activityDevice(final String id) {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         if (!jnetPcacp.activityDevice(id)) {
             return false;
         }
@@ -64,22 +57,33 @@ public class NetworkService {
         return true;
     }
 
+    public String getActiveDevice() {
+        String id = "";
+        for (Map.Entry<String, Boolean> device : deviceList.entrySet()) {
+            if (!device.getValue()) {
+                continue;
+            }
+            for (PcapIf pcapIf : jnetPcacp.getNetworkDevices()) {
+                if (!pcapIf.getName().equals(device.getKey())) {
+                    continue;
+                }
+                id = pcapIf.getDescription();
+            }
+        }
+        return id;
+    }
+
     public boolean isEmptyDevice() {
-        JnetPcacp jnetPcacp = jnetPcapFactory.getPcap();
         return jnetPcacp.emptyDevice();
     }
 
     public boolean checkDevice() {
-        for (Map.Entry<String, Boolean> a : deviceList.entrySet()) {
-            if (a.getValue()) {
-                log.info("디바이스: " + a.getKey() + " 활성화 상태: " + a.getValue());
+        for (Map.Entry<String, Boolean> device : deviceList.entrySet()) {
+            if (device.getValue()) {
+                log.info("device: " + device.getKey() + " status: " + device.getValue());
                 return true;
             }
         }
         return false;
-    }
-
-    public synchronized void clearPackets() {
-        packetContainer.clearPackets();
     }
 }

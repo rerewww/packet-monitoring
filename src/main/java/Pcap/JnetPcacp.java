@@ -13,7 +13,7 @@ public interface JnetPcacp {
      * 실시간 패킷 분석
      * @return
      */
-    public PacketContainer analyze();
+    public PacketContainer analyze(final PacketContainer packetContainer);
 
     public List<PcapIf> getNetworkDevices();
     public boolean activityDevice(final String id);
