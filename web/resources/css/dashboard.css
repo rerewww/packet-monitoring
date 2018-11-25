@@ -167,6 +167,6 @@ input:checked + .slider:before {
 .switchHeader {
     float: left;
     width: 50%;
-    font-size: 20px;
+    font-size: 18px;
     margin: auto;
 }

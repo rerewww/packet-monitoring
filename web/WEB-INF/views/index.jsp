@@ -50,7 +50,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li class="active"><a href="/network">Dashboard</a></li>
-        <li><a href="/network/viewDevices">Settings</a></li>
+        <li><a href="/network/viewDevices">Devices</a></li>
         <li><a href="#">Profile</a></li>
         <li><a href="/logout">Logout</a></li>
       </ul>
@@ -90,6 +90,12 @@
           <div class="switchHeader">Packets</div>
           <label class="switch">
             <input id="packetsCheck" type="checkbox" onclick="setting.onTogglePacketEvent()">
+            <span class="slider"></span>
+          </label>
+
+          <div class="switchHeader">ProcName</div>
+          <label class="switch">
+            <input id="procName" type="checkbox">
             <span class="slider"></span>
           </label>
         </div>

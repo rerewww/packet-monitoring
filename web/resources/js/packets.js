@@ -34,7 +34,8 @@ var packets = {
             protocol.innerText = result[i].protocol;
             viewStyle.setStyle(protocol, 'width', '10%');
 
-            var infoText = result[i].localPort + " -> " + result[i].remotePort + " [" + result[i].flag + "]" + " Length: " + result[i].size;
+            var infoText = result[i].localPort + " -> " + result[i].remotePort + " [" + result[i].flag + "]" + " Length: " + result[i].size
+                + " ProcName: " + (!!result[i].processName ? result[i].processName : "off...");
             var info = document.createElement('td');
             info.innerText = infoText;
 
@@ -72,6 +73,7 @@ var packets = {
                 url: '/network/detect',
                 type:'GET',
                 async: true,
+                data: { isProcName: $('input[id=procName]').is(":checked") },
                 dataType: 'json',
                 success: function(response) {
                     if (response === null || response === undefined) {
