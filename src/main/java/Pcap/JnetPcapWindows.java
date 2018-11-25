@@ -26,14 +26,15 @@ public class JnetPcapWindows implements JnetPcacp {
     private PcapIf device;
     @Getter
     private List<PcapIf> allDevices = new ArrayList<>();
+    private int detectLoop;
 
-    private static final int LOOP_VAL = 20;
     private static final int SNAP_LEN = 64 * 1024; // 크기대로 패킷을 자른다.
     private static final int FLAG = Pcap.MODE_NON_PROMISCUOUS;
     private static final int TIMEOUT = 10 * 1000; // ms
     private static final StringBuilder ERROR_BUF = new StringBuilder();
 
-    public JnetPcapWindows() {
+    public JnetPcapWindows(final int detectLoop) {
+        this.detectLoop = detectLoop;
         if (Pcap.findAllDevs(this.allDevices, ERROR_BUF) != Pcap.OK) {
             log.warn("[Error]: " + ERROR_BUF.toString());
         }
@@ -61,7 +62,7 @@ public class JnetPcapWindows implements JnetPcacp {
         Http http = new Http();
 
         Pcap pcap = Pcap.openLive(device.getName(), SNAP_LEN, FLAG, TIMEOUT, ERROR_BUF);
-        pcap.loop(LOOP_VAL, new PcapPacketHandler<String>() {
+        pcap.loop(this.detectLoop, new PcapPacketHandler<String>() {
             public void nextPacket(final PcapPacket pcapPacket, String user) {
                 if (pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
                     packetContainer.setPackets(new Packet(

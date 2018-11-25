@@ -2,7 +2,6 @@ package Config;
 
 import Pcap.JnetPcapFactory;
 import Pcap.JnetPcapWindows;
-import Network.PacketContainer;
 import aop.DetectPacketAop;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +16,7 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfig {
     @Value("#{serverXmlFile['admin.username']}") private String admin;
     @Value("#{serverXmlFile['admin.password']}") private String adminPassword;
+    @Value("#{serverXmlFile['detect.loop']}") private int detectLoop;
 
     @Bean
     public ServerProperties serverProperties() {
@@ -33,7 +33,7 @@ public class BeanConfig {
 
     @Bean
     public JnetPcapWindows jnetPcapWindows() {
-        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
+        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows(detectLoop);
         return jnetPcapWindows;
     }
 
