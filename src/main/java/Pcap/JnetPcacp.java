@@ -17,5 +17,5 @@ public interface JnetPcacp {
 
     public List<PcapIf> getNetworkDevices();
     public boolean activityDevice(final String id);
-    public boolean emptyDevice();
+    public boolean removeDevice();
 }
