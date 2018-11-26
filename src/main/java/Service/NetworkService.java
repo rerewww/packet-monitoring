@@ -73,10 +73,6 @@ public class NetworkService {
         return id;
     }
 
-    public boolean isEmptyDevice() {
-        return jnetPcacp.emptyDevice();
-    }
-
     public boolean checkDevice() {
         for (Map.Entry<String, Boolean> device : deviceList.entrySet()) {
             if (device.getValue()) {

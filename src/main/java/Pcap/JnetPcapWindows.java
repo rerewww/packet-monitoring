@@ -95,7 +95,7 @@ public class JnetPcapWindows implements JnetPcacp {
     }
 
     @Override
-    public boolean emptyDevice() {
+    public boolean removeDevice() {
         return this.device == null;
     }
 }
