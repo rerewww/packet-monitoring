@@ -100,6 +100,11 @@
           </label>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder">
+          <form action="/network/download" method="post">
+            <button id="download" name="contents" onclick="packets.download()">Download</button>
+          </form>
+        </div>
+        <div class="col-xs-6 col-sm-3 placeholder">
           <h4>Label</h4>
         </div>
       </div>

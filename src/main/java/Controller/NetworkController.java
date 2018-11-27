@@ -2,6 +2,7 @@ package Controller;
 
 import Network.PacketContainer;
 import Network.model.AjaxModel;
+import Network.model.DownloadView;
 import Network.model.Packet;
 import Service.NetworkService;
 import Service.WindowSystemService;
@@ -27,11 +28,13 @@ import java.util.*;
 public class NetworkController {
     private NetworkService networkService;
     private WindowSystemService windowSystemService;
+    private DownloadView downloadView;
 
     @Autowired
-    public NetworkController(final NetworkService networkService, final WindowSystemService windowSystemService) {
+    public NetworkController(final NetworkService networkService, final WindowSystemService windowSystemService, final DownloadView downloadView) {
         this.networkService = networkService;
         this.windowSystemService = windowSystemService;
+        this.downloadView = downloadView;
     }
 
     @RequestMapping()
@@ -109,5 +112,15 @@ public class NetworkController {
     @RequestMapping("/cpuAmount")
     public AjaxModel cpuAmout() {
         return new AjaxModel(true, "cpuAmount", windowSystemService.getCpuAmount());
+    }
+
+    @RequestMapping(value = "/download", method = RequestMethod.POST)
+    public ModelAndView download(
+            @RequestParam("contents") final String contents
+    ) {
+        ModelAndView modelAndView = new ModelAndView(downloadView);
+        modelAndView.addObject("fileName", "packet.txt");
+        modelAndView.addObject("text", contents);
+        return modelAndView;
     }
 }

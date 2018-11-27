@@ -96,5 +96,10 @@ var packets = {
                 }
             });
         }.bind(this), 10000);
+    },
+
+    download: function () {
+        var downloadElem = document.getElementById('download');
+        downloadElem.value = document.getElementById('hexDumpInfo').outerText;
     }
 };
