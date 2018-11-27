@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
+    <!-- Login Infos -->
     <entry key="admin.username">admin</entry>
     <entry key="admin.password">admin</entry>
+
+    <!-- Packet Infos -->
     <entry key="detect.loop">20</entry>
+
+    <!-- Download Infos -->
+    <entry key="download.filename">packet.txt</entry>
 </properties>
