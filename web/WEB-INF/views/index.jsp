@@ -27,6 +27,7 @@
   <script type="text/javascript" src="/resources/js/domControl.js"></script>
   <script type="text/javascript" src="/resources/js/chart.js"></script>
   <script type="text/javascript" src="/resources/js/setting.js"></script>
+  <script type="text/javascript" src="/resources/js/renderer.js"></script>
   <script type="text/javascript" src="/resources/js/lib/chart.bundle.min.js"></script>
   <script src="/resources/js/lib/jquery.3.3.1.js"></script>
 
@@ -115,7 +116,8 @@
         <div id='hexDumpInfo' class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
 ">
-          Please click on the packet...
+          <details id="tcpContents" style="display: none"></details>
+          <details id="dumpContents" style="display: none"></details>
         </div>
       </div>
 

@@ -183,3 +183,23 @@ input:checked + .slider:before {
 #download:hover {
     background-color: RoyalBlue;
 }
+
+details {
+    border-radius: 3px;
+    background: #EEE;
+    margin: 1em 0;
+}
+
+summary {
+    background: #333;
+    color: #FFF;
+    border-radius: 3px;
+    padding: 5px 10px;
+    outline: none;
+}
+
+/* Style the summary when details box is open */
+details[open] summary {
+    background: #69c773;
+    color: #333;
+}
