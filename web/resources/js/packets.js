@@ -14,47 +14,29 @@ var packets = {
     },
 
     showPackets : function (result) {
-        var length = result.length;
-        var elemPackets = document.getElementById('packets').children[0];
-        for (var i = 0; i < length; i++) {
-            var packet = document.createElement('tr');
-            var number = document.createElement('td');
-            number.innerText = i;
-            viewStyle.setStyle(number, 'width', '10%');
+        var packetElem = document.createElement('tr');
+        renderer.packet.render(packetElem, result);
 
-            var localAddress = document.createElement('td');
-            localAddress.innerText = result[i].localAddress;
-            viewStyle.setStyle(localAddress, 'width', '20%');
+        packetElem.onclick = function() {
+            var tcpContents = document.getElementById('tcpContents');
+            var dumpContents = document.getElementById('dumpContents');
 
-            var remoteAddress = document.createElement('td');
-            remoteAddress.innerText = result[i].remoteAddress;
-            viewStyle.setStyle(remoteAddress, 'width', '20%');
-
-            var protocol = document.createElement('td');
-            protocol.innerText = result[i].protocol;
-            viewStyle.setStyle(protocol, 'width', '10%');
-
-            var infoText = result[i].localPort + " -> " + result[i].remotePort + " [" + result[i].flag + "]" + " Length: " + result[i].size
-                + " ProcName: " + (!!result[i].processName ? result[i].processName : "off...");
-            var info = document.createElement('td');
-            info.innerText = infoText;
-
-            packet.setAttribute('value', result[i].hexDump);
-            if (result[i].protocol === 'Http') {
-                viewStyle.setStyle(packet, 'background-color', 'red');
+            var tcpLen = tcpContents.childElementCount;
+            for (var i = 0; i < tcpLen; i++) {
+                tcpContents.removeChild(tcpContents.firstChild);
             }
-            packet.onclick = function() {
-                document.getElementById('hexDumpInfo').innerText = window.event.target.parentElement.getAttribute('value');
-            }.bind(this);
 
-            packet.appendChild(number);
-            packet.appendChild(localAddress);
-            packet.appendChild(remoteAddress);
-            packet.appendChild(protocol);
-            packet.appendChild(info);
+            var dumpLen = dumpContents.childElementCount;
+            for (var j = 0; j < dumpLen; j++) {
+                dumpContents.removeChild(dumpContents.firstChild);
+            }
 
-            elemPackets.appendChild(packet);
-        }
+            var detailInfos = JSON.parse(window.event.target.parentElement.getAttribute('value'));
+            renderer.tcp.render(detailInfos.tcpModel);
+            renderer.dump.render(detailInfos.dump);
+            viewStyle.setStyle(tcpContents, 'display', 'block');
+            viewStyle.setStyle(dumpContents, 'display', 'block');
+        }.bind(this);
     },
 
     startDetectPackets: function (id) {
@@ -66,7 +48,6 @@ var packets = {
                 $('input[id=packetsCheck]').trigger('click');
             }
         }
-        console.log("call detect");
 
         setting.clearIdMap.detectCheck = setInterval(function () {
             $.ajax({
