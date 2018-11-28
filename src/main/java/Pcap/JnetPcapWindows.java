@@ -2,14 +2,17 @@ package Pcap;
 
 import Network.model.Packet;
 import Network.PacketContainer;
+import Network.model.TcpModel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
+import org.jnetpcap.packet.Payload;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 import org.jnetpcap.packet.format.FormatUtils;
+import org.jnetpcap.protocol.lan.Ethernet;
 import org.jnetpcap.protocol.network.Ip4;
 import org.jnetpcap.protocol.tcpip.Http;
 import org.jnetpcap.protocol.tcpip.Tcp;
@@ -57,23 +60,28 @@ public class JnetPcapWindows implements JnetPcacp {
      */
     @Override
     public PacketContainer analyze(final PacketContainer packetContainer) {
+        Ethernet ethernet = new Ethernet();
         Ip4 ip4 = new Ip4();
         Tcp tcp = new Tcp();
+        Payload payload = new Payload();
         Http http = new Http();
 
         Pcap pcap = Pcap.openLive(device.getName(), SNAP_LEN, FLAG, TIMEOUT, ERROR_BUF);
         pcap.loop(this.detectLoop, new PcapPacketHandler<String>() {
             public void nextPacket(final PcapPacket pcapPacket, String user) {
-                if (pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
+                if (pcapPacket.hasHeader(ethernet) && pcapPacket.hasHeader(ip4)
+                        && pcapPacket.hasHeader(tcp) && pcapPacket.hasHeader(payload)) {
+                    String tcpFlags = StringUtils.collectionToDelimitedString(tcp.flagsEnum(), " ");
                     packetContainer.setPackets(new Packet(
                             tcp.getName(),
                             FormatUtils.ip(ip4.source()),
                             FormatUtils.ip(ip4.destination()),
                             tcp.source(),
                             tcp.destination(),
-                            StringUtils.collectionToDelimitedString(tcp.flagsEnum(), " "),
+                            tcpFlags,
                             pcapPacket.getTotalSize(),
-                            pcapPacket.toHexdump()
+                            pcapPacket.toHexdump(),
+                            new TcpModel(tcp.source(), tcp.destination(), tcp.seq(), tcp.ack(), tcp.getOffset(), tcp.window(), tcp.urgent(), tcpFlags)
                     ));
                 }
 

@@ -2,27 +2,29 @@ package Network.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * Created by son on 2018-10-28.
  */
 
+@NoArgsConstructor
 @AllArgsConstructor
 @Data
 public class Packet {
     String protocol;
-    String localAddress;
-    String remoteAddress;
-    String flag;
-    String pid;
-    String processName;
-    String hexDump;
-    String url;
-    int localPort;
-    int remotePort;
-    int size;
+    protected String localAddress;
+    protected String remoteAddress;
+    protected String flag;
+    protected String pid;
+    protected String processName;
+    protected String hexDump;
+    protected String url;
+    protected int localPort;
+    protected int remotePort;
+    protected int size;
 
-    public Packet() {}
+    protected TcpModel tcpModel;
 
     public Packet(
             final String protocol,
@@ -32,7 +34,8 @@ public class Packet {
             final int remotePort,
             final String flag,
             final int size,
-            final String hexDump
+            final String hexDump,
+            TcpModel tcpModel
     ) {
         this.protocol = protocol;
         this.localAddress = localAddress;
@@ -42,5 +45,6 @@ public class Packet {
         this.flag = flag;
         this.size = size;
         this.hexDump = hexDump;
+        this.tcpModel = tcpModel;
     }
 }
