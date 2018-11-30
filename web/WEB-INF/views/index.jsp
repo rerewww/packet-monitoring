@@ -116,6 +116,8 @@
         <div id='hexDumpInfo' class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
 ">
+          <details id="ethernetContents" style="display: none"></details>
+          <details id="ipContents" style="display: none"></details>
           <details id="tcpContents" style="display: none"></details>
           <details id="dumpContents" style="display: none"></details>
         </div>

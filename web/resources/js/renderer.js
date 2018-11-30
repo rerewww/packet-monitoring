@@ -3,10 +3,13 @@
  */
 var renderer = {
     packet: {
-        render: function (packetElem, model) {
+        render: function (model,onclick) {
             var length = model.length;
             var elemPackets = document.getElementById('packets').children[0];
             for (var i = 0; i < length; i++) {
+                var packetElem = document.createElement('tr');
+                packetElem.onclick = onclick;
+
                 var number = document.createElement('td');
                 number.innerText = i;
                 viewStyle.setStyle(number, 'width', '10%');
@@ -29,13 +32,15 @@ var renderer = {
                 info.innerText = infoText;
 
                 detailInfos = {
-                    dump: model[i].hexDump,
-                    tcpModel: model[i].tcpModel
+                    ethernetModel: model[i].ethernetModel,
+                    ipModel: model[i].ipModel,
+                    tcpModel: model[i].tcpModel,
+                    dump: model[i].hexDump
                 };
                 packetElem.setAttribute('value', JSON.stringify(detailInfos));
-                if (model[i].protocol === 'Http') {
-                    viewStyle.setStyle(packetElem, 'background-color', 'red');
-                }
+                // if (model[i].protocol === 'Http') {
+                //     viewStyle.setStyle(packetElem, 'background-color', 'red');
+                // }
 
                 packetElem.appendChild(number);
                 packetElem.appendChild(localAddress);
@@ -45,6 +50,44 @@ var renderer = {
 
                 elemPackets.appendChild(packetElem);
             }
+        }
+    },
+
+    ethernet: {
+        render: function (model) {
+            if (model === null) {
+                return;
+            }
+            var details = document.getElementById('ethernetContents');
+            var summary = document.createElement('summary');
+            summary.textContent = 'Ethernet';
+            details.appendChild(summary);
+
+            var keys = Object.keys(model);
+            keys.forEach(function (key) {
+                var p = document.createElement('p');
+                p.textContent = key + ': ' + model[key];
+                details.appendChild(p);
+            });
+        }
+    },
+
+    ip: {
+        render: function (model) {
+            if (model === null) {
+                return;
+            }
+            var details = document.getElementById('ipContents');
+            var summary = document.createElement('summary');
+            summary.textContent = 'Internet Protocol';
+            details.appendChild(summary);
+
+            var keys = Object.keys(model);
+            keys.forEach(function (key) {
+                var p = document.createElement('p');
+                p.textContent = key + ': ' + model[key];
+                details.appendChild(p);
+            });
         }
     },
 

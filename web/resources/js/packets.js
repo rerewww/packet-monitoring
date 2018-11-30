@@ -14,29 +14,36 @@ var packets = {
     },
 
     showPackets : function (result) {
-        var packetElem = document.createElement('tr');
-        renderer.packet.render(packetElem, result);
-
-        packetElem.onclick = function() {
+        var onclick = function() {
+            var ethernetContents = document.getElementById('ethernetContents');
+            var ipContents = document.getElementById('ipContents');
             var tcpContents = document.getElementById('tcpContents');
             var dumpContents = document.getElementById('dumpContents');
 
-            var tcpLen = tcpContents.childElementCount;
-            for (var i = 0; i < tcpLen; i++) {
-                tcpContents.removeChild(tcpContents.firstChild);
-            }
-
-            var dumpLen = dumpContents.childElementCount;
-            for (var j = 0; j < dumpLen; j++) {
-                dumpContents.removeChild(dumpContents.firstChild);
-            }
+            this._detailsRemoveChild([ipContents, tcpContents, dumpContents]);
 
             var detailInfos = JSON.parse(window.event.target.parentElement.getAttribute('value'));
+            renderer.ethernet.render(detailInfos.ethernetModel);
+            renderer.ip.render(detailInfos.ipModel);
             renderer.tcp.render(detailInfos.tcpModel);
             renderer.dump.render(detailInfos.dump);
+
+            viewStyle.setStyle(ethernetContents, 'display', 'block');
+            viewStyle.setStyle(ipContents, 'display', 'block');
             viewStyle.setStyle(tcpContents, 'display', 'block');
             viewStyle.setStyle(dumpContents, 'display', 'block');
         }.bind(this);
+
+        renderer.packet.render(result, onclick);
+    },
+
+    _detailsRemoveChild: function(detailContentElems) {
+        detailContentElems.forEach(function (detailContentElem) {
+            var len = detailContentElem.childElementCount;
+            for (var i = 0; i < len; i++) {
+                detailContentElem.removeChild(detailContentElem.firstChild);
+            }
+        });
     },
 
     startDetectPackets: function (id) {

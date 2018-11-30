@@ -24,6 +24,8 @@ public class Packet {
     protected int remotePort;
     protected int size;
 
+    protected EthernetModel ethernetModel;
+    protected IpModel ipModel;
     protected TcpModel tcpModel;
 
     public Packet(
@@ -35,7 +37,9 @@ public class Packet {
             final String flag,
             final int size,
             final String hexDump,
-            TcpModel tcpModel
+            final EthernetModel ethernetModel,
+            final IpModel ipModel,
+            final TcpModel tcpModel
     ) {
         this.protocol = protocol;
         this.localAddress = localAddress;
@@ -45,6 +49,8 @@ public class Packet {
         this.flag = flag;
         this.size = size;
         this.hexDump = hexDump;
+        this.ethernetModel = ethernetModel;
+        this.ipModel = ipModel;
         this.tcpModel = tcpModel;
     }
 }
