@@ -116,6 +116,7 @@
         <div id='hexDumpInfo' class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
 ">
+          <h3 style="padding-bottom: 5px; font-weight: bold;">TCP/IP 4 Layer</h3>
           <details id="ethernetContents" style="display: none"></details>
           <details id="ipContents" style="display: none"></details>
           <details id="tcpContents" style="display: none"></details>
