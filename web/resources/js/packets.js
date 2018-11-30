@@ -88,6 +88,24 @@ var packets = {
 
     download: function () {
         var downloadElem = document.getElementById('download');
-        downloadElem.value = document.getElementById('hexDumpInfo').outerText;
+        downloadElem.value = this._getDownloadText(document.getElementById('hexDumpInfo'));
+    },
+
+    _getDownloadText: function(elem) {
+        var contents = '';
+        var i = 0;
+        for(; i < elem.childElementCount; i++) {
+            var children = elem.children[i];
+            if (children.childElementCount > 0) {
+                contents += this._getDownloadText(children);
+            } else {
+                if (children.tagName === 'SUMMARY') {
+                    contents = '\n' + contents;
+                }
+                contents += children.outerText;
+                contents += '\n';
+            }
+        }
+        return contents;
     }
 };
