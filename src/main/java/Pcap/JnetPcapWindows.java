@@ -1,5 +1,7 @@
 package Pcap;
 
+import Network.model.EthernetModel;
+import Network.model.IpModel;
 import Network.model.Packet;
 import Network.PacketContainer;
 import Network.model.TcpModel;
@@ -81,6 +83,9 @@ public class JnetPcapWindows implements JnetPcacp {
                             tcpFlags,
                             pcapPacket.getTotalSize(),
                             pcapPacket.toHexdump(),
+                            new EthernetModel(FormatUtils.mac(ethernet.source()), FormatUtils.mac(ethernet.destination())),
+                            new IpModel(ip4.version(), ip4.getHeaderLength(), ip4.getLength(), ip4.getId(), StringUtils.collectionToDelimitedString(ip4.flagsEnum(), " ")
+                                    , ip4.ttl(), tcp.getNicname(), ip4.checksum(), FormatUtils.ip(ip4.source()), FormatUtils.ip(ip4.destination())),
                             new TcpModel(tcp.source(), tcp.destination(), tcp.seq(), tcp.ack(), tcp.getOffset(), tcp.window(), tcp.urgent(), tcpFlags)
                     ));
                 }

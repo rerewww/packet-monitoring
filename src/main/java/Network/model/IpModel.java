@@ -14,8 +14,8 @@ public class IpModel {
     @Getter private final int id;
     @Getter private final String flag;
     @Getter private final int ttl;
-    @Getter private final int protocol;
-    @Getter private final String checksum;
+    @Getter private final String protocol;
+    @Getter private final int checksum;
     @Getter private final String source;
     @Getter private final String destination;
 }
