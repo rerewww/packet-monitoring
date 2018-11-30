@@ -20,7 +20,7 @@ var packets = {
             var tcpContents = document.getElementById('tcpContents');
             var dumpContents = document.getElementById('dumpContents');
 
-            this._detailsRemoveChild([ipContents, tcpContents, dumpContents]);
+            this._detailsRemoveChild([ethernetContents, ipContents, tcpContents, dumpContents]);
 
             var detailInfos = JSON.parse(window.event.target.parentElement.getAttribute('value'));
             renderer.ethernet.render(detailInfos.ethernetModel);
