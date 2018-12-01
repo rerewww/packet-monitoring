@@ -61,21 +61,18 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-3 col-md-2 sidebar">
-      <ul class="nav nav-sidebar">
-        <li class="active"><a href="/network">Dashboard<span class="sr-only">(current)</span></a></li>
-        <li id="devices"><a href="/network/viewDevices">Devices</a></li>
-        <li><a href="#">Analytics</a></li>
-        <li><a href="#">Export</a></li>
-      </ul>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <div class="main">
       <div class="row placeholders" style="">
-        <div class="panel panel-default col-xs-6 col-sm-3 placeholder">
+        <div class="panel panel-default col-xs-4 col-sm-2 placeholder">
           <h4>CPU(%)</h4>
           <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row;">
+
+        <div class="col-xs-4 col-sm-2 placeholder">
+          <canvas id="mostCalledProgram" height="200px"></canvas>
+        </div>
+
+        <div class="col-xs-4 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row;">
           <div class="switchHeader">Cpu</div>
           <label class="switch">
             <input id="cpuCheck" type="checkbox" onclick="setting.onToggleCpuEvent()">
@@ -100,17 +97,15 @@
             <span class="slider"></span>
           </label>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
+        <div class="col-xs-4 col-sm-3 placeholder">
           <form action="/network/download" method="post">
             <button id="download" name="contents" onclick="packets.download()">Download</button>
           </form>
         </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <h4>Label</h4>
-        </div>
       </div>
+      <div style="border-bottom: 1px solid paleturquoise; margin-bottom: 10px"></div>
       <div class="row placeholders" style="margin-bottom: 0px">
-        <div class="col-xs-6 col-sm-3 placeholder" style="width: 50%;">
+        <div class="col-xs-4 col-sm-3 placeholder" style="width: 50%;">
           <canvas id="packetChart" height="320"></canvas>
         </div>
         <div id='hexDumpInfo' class="col-xs-6 col-sm-3 placeholder" style="

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.util.*;
@@ -39,9 +40,14 @@ public class NetworkController {
 
     @RequestMapping()
     public ModelAndView analyze() throws IOException {
+        String device = networkService.getActiveDevice();
+        if (StringUtils.isEmpty(device)) {
+           return new ModelAndView(new RedirectView("/network/viewDevices"));
+        }
+
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", windowSystemService.getSystemOsName());
-        modelAndView.addObject("id", networkService.getActiveDevice());
+        modelAndView.addObject("device", device);
         return modelAndView;
     }
 
@@ -50,6 +56,7 @@ public class NetworkController {
             @RequestParam(value = "isProcName") final boolean isProcName
     ) throws IOException {
         PacketContainer packetContainer = networkService.analyze();
+        Map<String, Integer> most = null;
 
         if (!StringUtils.isEmpty(isProcName) && isProcName) {
             Map<Integer, List<String>> ports = new HashMap<>();
@@ -67,12 +74,14 @@ public class NetworkController {
                 List<String> proc = ports.get(packet.getLocalPort());
                 packet.setProcessName(proc.get(1));
             }
+            most = networkService.getMostCalledProgram(packetContainer.getPackets());
         }
 
         return new AjaxModel(
                 true,
                 "detect",
                 packetContainer.getPackets(),
+                most,
                 packetContainer.getPackets().size(),
                 null
         );

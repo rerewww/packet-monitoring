@@ -1,6 +1,7 @@
 package Service;
 
 import Network.PacketContainer;
+import Network.model.Packet;
 import Pcap.JnetPcacp;
 import Pcap.JnetPcapFactory;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -21,6 +23,7 @@ import java.util.*;
 public class NetworkService {
     private JnetPcacp jnetPcacp;
     private Map<String, Boolean> deviceList = new HashMap<>();
+    private Map<String, Integer> most = new HashMap<>();
 
     @Autowired
     public NetworkService(final JnetPcapFactory jnetPcapFactory) {
@@ -81,5 +84,35 @@ public class NetworkService {
             }
         }
         return false;
+    }
+
+    public Map<String, Integer> getMostCalledProgram(final List<Packet> packets) {
+        for (Packet packet : packets) {
+            if (StringUtils.isEmpty(packet.getProcessName())) {
+                continue;
+            }
+
+            if (!most.containsKey(packet.getProcessName())) {
+                most.put(packet.getProcessName(), 1);
+                continue;
+            }
+
+            int val = most.get(packet.getProcessName());
+            most.put(packet.getProcessName(), ++val);
+        }
+
+        while (most.size() > 5) {
+            Map.Entry<String, Integer> temp = null;
+            for (Map.Entry<String, Integer> item : most.entrySet()) {
+                if (temp == null || temp.getValue() > item.getValue()) {
+                    temp = item;
+                }
+            }
+
+            if (temp != null) {
+                most.remove(temp.getKey());
+            }
+        }
+        return most;
     }
 }

@@ -12,6 +12,30 @@ var chart = {
         }, 15);
     },
 
+    drawPieChart: function(model) {
+        if (Object.keys(model).length === 0) {
+            return;
+        }
+
+        new Chart(document.getElementById("mostCalledProgram"), {
+            type: 'pie',
+            data: {
+                labels: Object.keys(model),
+                datasets: [{
+                    label: "called",
+                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    data: Object.values(model)
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Most called program'
+                }
+            }
+        });
+    },
+
     drawPacketChart: function(packetsSize) {
         var ctx = document.getElementById("packetChart").getContext('2d');
         var date = new Date();
