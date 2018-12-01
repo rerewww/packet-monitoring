@@ -63,7 +63,7 @@
   <div class="row">
     <div class="main">
       <div class="row placeholders" style="">
-        <div class="panel panel-default col-xs-4 col-sm-3 placeholder">
+        <div class="panel panel-default col-xs-4 col-sm-2 placeholder">
           <h4>CPU(%)</h4>
           <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
