@@ -6,7 +6,7 @@
     <entry key="admin.password">admin</entry>
 
     <!-- Packet Infos -->
-    <entry key="detect.loop">20</entry>
+    <entry key="detect.loop">30</entry>
 
     <!-- Download Infos -->
     <entry key="download.filename">packet.txt</entry>

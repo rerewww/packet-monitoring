@@ -75,6 +75,11 @@
           <h4>CPU(%)</h4>
           <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
+
+        <div class="col-xs-6 col-sm-3 placeholder">
+          <h4>Label</h4>
+        </div>
+
         <div class="col-xs-6 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row;">
           <div class="switchHeader">Cpu</div>
           <label class="switch">
@@ -104,9 +109,6 @@
           <form action="/network/download" method="post">
             <button id="download" name="contents" onclick="packets.download()">Download</button>
           </form>
-        </div>
-        <div class="col-xs-6 col-sm-3 placeholder">
-          <h4>Label</h4>
         </div>
       </div>
       <div class="row placeholders" style="margin-bottom: 0px">

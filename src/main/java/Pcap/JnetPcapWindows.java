@@ -10,7 +10,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
-import org.jnetpcap.packet.Payload;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 import org.jnetpcap.packet.format.FormatUtils;
@@ -65,14 +64,12 @@ public class JnetPcapWindows implements JnetPcacp {
         Ethernet ethernet = new Ethernet();
         Ip4 ip4 = new Ip4();
         Tcp tcp = new Tcp();
-        Payload payload = new Payload();
         Http http = new Http();
 
         Pcap pcap = Pcap.openLive(device.getName(), SNAP_LEN, FLAG, TIMEOUT, ERROR_BUF);
         pcap.loop(this.detectLoop, new PcapPacketHandler<String>() {
             public void nextPacket(final PcapPacket pcapPacket, String user) {
-                if (pcapPacket.hasHeader(ethernet) && pcapPacket.hasHeader(ip4)
-                        && pcapPacket.hasHeader(tcp) && pcapPacket.hasHeader(payload)) {
+                if (pcapPacket.hasHeader(ethernet) && pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
                     String tcpFlags = StringUtils.collectionToDelimitedString(tcp.flagsEnum(), " ");
                     packetContainer.setPackets(new Packet(
                             tcp.getName(),
