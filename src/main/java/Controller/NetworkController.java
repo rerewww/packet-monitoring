@@ -56,6 +56,7 @@ public class NetworkController {
             @RequestParam(value = "isProcName") final boolean isProcName
     ) throws IOException {
         PacketContainer packetContainer = networkService.analyze();
+        Map<String, Integer> most = null;
 
         if (!StringUtils.isEmpty(isProcName) && isProcName) {
             Map<Integer, List<String>> ports = new HashMap<>();
@@ -73,12 +74,14 @@ public class NetworkController {
                 List<String> proc = ports.get(packet.getLocalPort());
                 packet.setProcessName(proc.get(1));
             }
+            most = networkService.getMostCalledProgram(packetContainer.getPackets());
         }
 
         return new AjaxModel(
                 true,
                 "detect",
                 packetContainer.getPackets(),
+                most,
                 packetContainer.getPackets().size(),
                 null
         );

@@ -73,6 +73,10 @@ var packets = {
                         packets.showPackets(response.data);
                     }
 
+                    if ($('input[id=procName]').is(":checked")) {
+                        chart.drawPieChart(response.most);
+                    }
+
                     domControl.moveScroll();
 
                     if ($('input[id=graphCheck]').is(":checked")) {
