@@ -87,6 +87,18 @@ public class NetworkController {
         );
     }
 
+    @RequestMapping(value = "/commit", method = RequestMethod.POST)
+    public void commit(
+            @RequestParam("contents") final List<Map<String, String>> contents
+    ) {
+        //TODO Receive by List Map Type
+    }
+
+    @RequestMapping("/analytics")
+    public ModelAndView analytics() {
+        return new ModelAndView("analytics");
+    }
+
     @RequestMapping("/viewDevices")
     public ModelAndView viewDevices() {
         ModelAndView modelAndView = new ModelAndView("devices");

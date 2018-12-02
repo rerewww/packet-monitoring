@@ -11,23 +11,17 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Dashboard Template for Bootstrap</title>
-
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-
     <script type="text/javascript" src="/resources/js/packets.js"></script>
     <script type="text/javascript" src="/resources/js/style.js"></script>
     <script type="text/javascript" src="/resources/js/devices.js"></script>
     <script src="/resources/js/lib/jquery.3.3.1.js"></script>
-
     <!-- Custom styles for this template -->
     <link href="/resources/css/dashboard.css" rel="stylesheet">
 </head>
-
 <body>
-
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -42,22 +36,21 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/network">Dashboard</a></li>
-                <li class="active"><a href="/network/viewDevices">Devices</a></li>
-                <li><a href="/network/analytics">Analytics</a></li>
+                <li><a href="/network/viewDevices">Devices</a></li>
+                <li class="active"><a href="/network/analytics">Analytics</a></li>
                 <li><a href="/network/setting">Setting</a></li>
                 <li><a href="/logout">Logout</a></li>
             </ul>
         </div>
     </div>
 </nav>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
                 <li><a href="/network">Dashboard<span class="sr-only">(current)</span></a></li>
-                <li class="active"><a href="/network/viewDevices">Devices</a></li>
-                <li><a href="/network/analytics">Analytics</a></li>
+                <li><a href="/network/viewDevices">Devices</a></li>
+                <li class="active"><a href="/network/analytics">Analytics</a></li>
                 <li><a href="/network/setting">Setting</a></li>
             </ul>
         </div>
@@ -67,8 +60,4 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    devices.addDevices(${devices});
-</script>
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>
