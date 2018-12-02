@@ -18,7 +18,32 @@ var devices = {
                         console.warn('Failed get cpu amount');
                         return;
                     }
-                    chart.drawCpucpuAmount(response.data);
+                    chart.drawCpuAmount(response.data);
+                },
+                error: function(response) {
+                    console.warn('error occurred: ', response.responseText);
+                }
+            });
+        }.bind(this), 5000);
+    },
+
+    startMemoryAmount: function () {
+        if (!$('input[id=memoryCheck]').is(':checked')) {
+            $('input[id=memoryCheck]').trigger('click');
+        }
+
+        setting.clearIdMap.memoryCheck = setInterval(function () {
+            $.ajax({
+                url: '/network/memoryAmount',
+                type:'GET',
+                async: true,
+                dataType: 'json',
+                success: function(response) {
+                    if (response === null || response === undefined) {
+                        console.warn('Failed get cpu amount');
+                        return;
+                    }
+                    chart.drawMemoryAmount(response.data);
                 },
                 error: function(response) {
                     console.warn('error occurred: ', response.responseText);

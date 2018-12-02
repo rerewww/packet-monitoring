@@ -47,7 +47,7 @@ public class NetworkController {
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", windowSystemService.getSystemOsName());
-        modelAndView.addObject("device", device);
+        modelAndView.addObject("deviceName", device);
         return modelAndView;
     }
 
@@ -121,6 +121,11 @@ public class NetworkController {
     @RequestMapping("/cpuAmount")
     public AjaxModel cpuAmout() {
         return new AjaxModel(true, "cpuAmount", windowSystemService.getCpuAmount());
+    }
+
+    @RequestMapping("/memoryAmount")
+    public AjaxModel memoryAmout() {
+        return new AjaxModel(true, "memoryAmount", windowSystemService.getMemoryAmount());
     }
 
     @RequestMapping(value = "/download", method = RequestMethod.POST)

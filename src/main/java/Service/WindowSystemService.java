@@ -80,6 +80,14 @@ public class WindowSystemService implements SystemService {
         return average;
     }
 
+    @Override
+    public int getMemoryAmount() {
+        OperatingSystemMXBean operatingSystemMXBean = (com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean();
+        double usage = operatingSystemMXBean.getTotalPhysicalMemorySize() - operatingSystemMXBean.getFreePhysicalMemorySize();
+        double average = usage / operatingSystemMXBean.getTotalPhysicalMemorySize() * 100;
+        return (int)Math.round(average);
+    }
+
     private String[] getCommand(final String cmd) {
         return new String[] { CMD_EXE_NAME, PREFIX, cmd};
     }

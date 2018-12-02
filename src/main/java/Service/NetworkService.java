@@ -101,7 +101,7 @@ public class NetworkService {
             most.put(packet.getProcessName(), ++val);
         }
 
-        while (most.size() > 5) {
+        while (most.size() > 3) {
             Map.Entry<String, Integer> temp = null;
             for (Map.Entry<String, Integer> item : most.entrySet()) {
                 if (temp == null || temp.getValue() > item.getValue()) {

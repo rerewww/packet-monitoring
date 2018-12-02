@@ -15,6 +15,10 @@ var packets = {
 
     showPackets : function (result) {
         var onclick = function() {
+            if (document.getElementById('hexDumpInfo').childElementCount > 5) {
+                document.getElementById('hexDumpInfo').removeChild(document.getElementById('hexDumpInfo').children[1]);
+            }
+
             var ethernetContents = document.getElementById('ethernetContents');
             var ipContents = document.getElementById('ipContents');
             var tcpContents = document.getElementById('tcpContents');
@@ -48,11 +52,20 @@ var packets = {
 
     startDetectPackets: function (id) {
         if (!id) {
+            if (!$('input[id=cpuCheck]').is(":checked")) {
+                $('input[id=cpuCheck]').trigger('click');
+            }
+            if (!$('input[id=memoryCheck]').is(":checked")) {
+                $('input[id=memoryCheck]').trigger('click');
+            }
             if (!$('input[id=graphCheck]').is(":checked")) {
                 $('input[id=graphCheck]').trigger('click');
             }
             if (!$('input[id=packetsCheck]').is(":checked")) {
                 $('input[id=packetsCheck]').trigger('click');
+            }
+            if (!$('input[id=procName]').is(":checked")) {
+                $('input[id=procName]').trigger('click');
             }
         }
 

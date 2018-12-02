@@ -1,7 +1,7 @@
 var chart = {
     data: [],
     labels: [],
-    drawCpucpuAmount: function (data) {
+    drawCpuAmount: function (data) {
         var spanText = document.getElementById('cpuAmount');
         var deegres = 0;
         var acrInterval = setInterval (function() {
@@ -10,6 +10,17 @@ var chart = {
                 clearInterval(acrInterval);
             }
         }, 15);
+    },
+
+    drawMemoryAmount: function (data) {
+        var spanText = document.getElementById('memoryAmount');
+        var deegres = 0;
+        var acrInterval = setInterval (function() {
+            spanText.innerHTML = (++deegres).toFixed();
+            if( deegres >= data) {
+                clearInterval(acrInterval);
+            }
+        }, 10);
     },
 
     drawPieChart: function(model) {
@@ -23,7 +34,7 @@ var chart = {
                 labels: Object.keys(model),
                 datasets: [{
                     label: "called",
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    backgroundColor: ["#ff4e50", "#fc913a","#f9d423"],
                     data: Object.values(model)
                 }]
             },
