@@ -168,7 +168,7 @@ input:checked + .slider:before {
     float: left;
     width: 50%;
     font-size: 18px;
-    margin: auto;
+    /*margin: auto;*/
 }
 
 #download{

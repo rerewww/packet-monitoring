@@ -63,19 +63,30 @@
   <div class="row">
     <div class="main">
       <div class="row placeholders" style="">
-        <div class="panel panel-default col-xs-4 col-sm-2 placeholder">
+        <div class="panel panel-default col-xs-6 col-sm-1 placeholder" style="width: 15%;">
           <h4>CPU(%)</h4>
           <span id="cpuAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
         </div>
 
-        <div class="col-xs-4 col-sm-2 placeholder">
+        <div class="panel panel-default col-xs-6 col-sm-1 placeholder" style="width: 15%; margin-left: 3%">
+          <h4>Memory(%)</h4>
+          <span id="memoryAmount" style="font-family: Helvetica; font-size: 70px; font-weight: bold;"></span>
+        </div>
+
+        <div class="col-xs-6 col-sm-2 placeholder">
           <canvas id="mostCalledProgram" height="200px"></canvas>
         </div>
 
-        <div class="col-xs-4 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row;">
+        <div class="col-xs-6 col-sm-3 placeholder" style="display: flex; flex-wrap: wrap; flex-direction: row; width: 20%">
           <div class="switchHeader">Cpu</div>
           <label class="switch">
             <input id="cpuCheck" type="checkbox" onclick="setting.onToggleCpuEvent()">
+            <span class="slider"></span>
+          </label>
+
+          <div class="switchHeader">Memory</div>
+          <label class="switch">
+            <input id="memoryCheck" type="checkbox" onclick="setting.onToggleMemoryEvent()">
             <span class="slider"></span>
           </label>
 
@@ -97,7 +108,7 @@
             <span class="slider"></span>
           </label>
         </div>
-        <div class="col-xs-4 col-sm-3 placeholder">
+        <div class="col-xs-6 col-sm-3 placeholder" style="width:17%;">
           <form action="/network/download" method="post">
             <button id="download" name="contents" onclick="packets.download()">Download</button>
           </form>
