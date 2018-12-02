@@ -123,6 +123,11 @@ public class NetworkController {
         return new AjaxModel(true, "cpuAmount", windowSystemService.getCpuAmount());
     }
 
+    @RequestMapping("/memoryAmount")
+    public AjaxModel memoryAmout() {
+        return new AjaxModel(true, "memoryAmount", windowSystemService.getMemoryAmount());
+    }
+
     @RequestMapping(value = "/download", method = RequestMethod.POST)
     public ModelAndView download(
             @RequestParam("contents") final String contents

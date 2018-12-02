@@ -4,6 +4,7 @@
 var setting = {
     clearIdMap : {
         cpuCheck: null,
+        memoryCheck: null,
         detectCheck: null
     },
 
@@ -15,6 +16,17 @@ var setting = {
             this.clearIdMap.cpuCheck = null;
         } else if (this.clearIdMap.cpuCheck === null && isCheckedCpu){
             devices.startCpuAmount();
+        }
+    },
+
+    onToggleMemoryEvent: function () {
+        var id = window.event.srcElement.id;
+        var isCheckedMemory = $('input[id=memoryCheck]').is(':checked');
+        if (!isCheckedMemory) {
+            clearInterval(this.clearIdMap[id]);
+            this.clearIdMap.memoryCheck= null;
+        } else if (this.clearIdMap.memoryCheck === null && isCheckedMemory){
+            devices.startMemoryAmount();
         }
     },
 

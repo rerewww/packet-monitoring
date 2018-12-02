@@ -11,4 +11,5 @@ public interface SystemService {
     public String getProcessNameFromPid(final String pid) throws IOException;
     public StringBuilder executeCommand(final String[] command) throws IOException;
     public int getCpuAmount();
+    public int getMemoryAmount();
 }
