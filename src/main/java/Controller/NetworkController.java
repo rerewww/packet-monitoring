@@ -47,7 +47,7 @@ public class NetworkController {
 
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("systemInfos", windowSystemService.getSystemOsName());
-        modelAndView.addObject("device", device);
+        modelAndView.addObject("deviceName", device);
         return modelAndView;
     }
 

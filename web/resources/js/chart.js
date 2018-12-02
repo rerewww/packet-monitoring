@@ -34,7 +34,7 @@ var chart = {
                 labels: Object.keys(model),
                 datasets: [{
                     label: "called",
-                    backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+                    backgroundColor: ["#ff4e50", "#fc913a","#f9d423"],
                     data: Object.values(model)
                 }]
             },

@@ -172,8 +172,9 @@ input:checked + .slider:before {
 }
 
 #download{
-    background-color: DodgerBlue;
+    background-color: darkcyan;
     border: none;
+    border-radius: 7px;
     color: white;
     padding: 12px 30px;
     cursor: pointer;
@@ -181,7 +182,7 @@ input:checked + .slider:before {
 }
 
 #download:hover {
-    background-color: RoyalBlue;
+    background-color: silver;
 }
 
 details {
