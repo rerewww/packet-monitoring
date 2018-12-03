@@ -4,6 +4,7 @@ import Network.PacketContainer;
 import Network.model.Packet;
 import Pcap.JnetPcacp;
 import Pcap.JnetPcapFactory;
+import dao.RevisionDao;
 import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.PcapIf;
 import org.json.JSONArray;
@@ -22,17 +23,20 @@ import java.util.*;
 @Service
 public class NetworkService {
     private JnetPcacp jnetPcacp;
+    private RevisionDao revisionDao;
     private Map<String, Boolean> deviceList = new HashMap<>();
     private Map<String, Integer> most = new HashMap<>();
 
     @Autowired
-    public NetworkService(final JnetPcapFactory jnetPcapFactory) {
+    public NetworkService(final JnetPcapFactory jnetPcapFactory, final RevisionDao revisionDao) {
         this.jnetPcacp = jnetPcapFactory.getPcap();
         List<PcapIf> pcapIfs = jnetPcacp.getNetworkDevices();
 
         for (PcapIf pcapIf : pcapIfs) {
             deviceList.put(pcapIf.getName(), false);
         }
+
+        this.revisionDao = revisionDao;
     }
 
     public PacketContainer analyze() throws IOException {
@@ -114,5 +118,9 @@ public class NetworkService {
             }
         }
         return most;
+    }
+
+    public void insertPacket(final Map<String, String> contents) {
+        revisionDao.insert(contents);
     }
 }

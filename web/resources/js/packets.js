@@ -118,22 +118,29 @@ var packets = {
     },
 
     commit: function () {
-        var commands = [];
+        var command = {};
         var tr = document.getElementsByTagName('tr');
         var len = tr.length;
         for (var i = 0; i < len; i++) {
             if (tr[i].className !== 'commit') {
                 continue;
             }
-            commands.push({
-                'localAddress': tr[i].children[1].textContent,
-                'remoteAddress': tr[i].children[2].textContent,
-                'protocol': tr[i].children[3].textContent,
-                'info': tr[i].children[4].textContent
-            });
+            command = {
+                localAddress: tr[i].children[1].textContent,
+                remoteAddress: tr[i].children[2].textContent,
+                protocol: tr[i].children[3].textContent,
+                info: tr[i].children[4].textContent
+            };
         }
-        var downloadElem = document.getElementById('commit');
-        downloadElem.value = commands;
+
+        $.ajax({
+            url: '/network/commit',
+            type: 'post',
+            async: true,
+            data: JSON.stringify(command),
+            contentType: "application/json;charset=UTF-8",
+            traditional: true
+        });
     },
 
     _getDownloadText: function(elem) {

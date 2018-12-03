@@ -115,9 +115,7 @@
           </form>
         </div>
         <div class="col-xs-6 col-sm-3 placeholder" style="width:17%;">
-          <form action="/network/commit" method="post">
-            <button class="action" id="commit" name="contents" onclick="packets.commit()">Commit</button>
-          </form>
+          <button class="action" id="commit" name="contents" onclick="packets.commit()">Commit</button>
         </div>
       </div>
       <div style="border-bottom: 1px solid paleturquoise; margin-bottom: 5px"></div>
