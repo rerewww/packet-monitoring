@@ -5,6 +5,7 @@ import Network.model.Packet;
 import Pcap.JnetPcacp;
 import Pcap.JnetPcapFactory;
 import dao.RevisionDao;
+import dao.model.Revision;
 import lombok.extern.slf4j.Slf4j;
 import org.jnetpcap.PcapIf;
 import org.json.JSONArray;
@@ -122,5 +123,9 @@ public class NetworkService {
 
     public void insertPacket(final Map<String, String> contents) {
         revisionDao.insert(contents);
+    }
+
+    public List<Revision> getRevisions() {
+        return revisionDao.select();
     }
 }

@@ -14,9 +14,7 @@
     <title>Dashboard Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-    <script type="text/javascript" src="/resources/js/packets.js"></script>
-    <script type="text/javascript" src="/resources/js/style.js"></script>
-    <script type="text/javascript" src="/resources/js/devices.js"></script>
+    <script type="text/javascript" src="/resources/js/analytics.js"></script>
     <script src="/resources/js/lib/jquery.3.3.1.js"></script>
     <!-- Custom styles for this template -->
     <link href="/resources/css/dashboard.css" rel="stylesheet">
@@ -56,8 +54,25 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="row placeholders">
+
+                <table class="table">
+                    <thead style="background-color: darkgray;">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Local</th>
+                        <th scope="col">Remote</th>
+                        <th scope="col">Protocol</th>
+                        <th scope="col">Info</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 </div>
+<script>
+    analytics.setTables();
+</script>
 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>
