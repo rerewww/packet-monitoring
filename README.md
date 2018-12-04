@@ -6,7 +6,7 @@ Network Monitoring
 
 Documentation
 -------------
-
+![main view](./image/view.PNG)
 Personal network monitoring.
 
 It consists of a web-based interface and uses Spring MVC.
