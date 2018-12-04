@@ -15,20 +15,20 @@ It consists of a web-based interface and uses Spring MVC.
 Quick Build
 -----------
 
-1. Run Maven
-```
-mvn clean package
-```
-2. Modify server.xml
+1. Modify server.xml
 ```
 <entry key="admin.username">your name</entry>
 <entry key="admin.password">your password</entry>
 ```
-3. Modify dispatcher-servlet
+2. Modify dispatcher-servlet
 ```
 <!-- JDBC -->
 <property name="username" value="your mysql id"/>
 <property name="password" value="your mysql password"/>
+```
+3. Run Maven
+```
+mvn clean package
 ```
 4. Deploy to tomcat
 
