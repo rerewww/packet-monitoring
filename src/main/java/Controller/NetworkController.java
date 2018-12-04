@@ -92,6 +92,11 @@ public class NetworkController {
         networkService.insertPacket(contents);
     }
 
+    @RequestMapping(value = "/getRevisions", method = RequestMethod.GET)
+    public AjaxModel commit() {
+        return new AjaxModel(true, "getRevisions", networkService.getRevisions());
+    }
+
     @RequestMapping("/analytics")
     public ModelAndView analytics() {
         return new ModelAndView("analytics");
