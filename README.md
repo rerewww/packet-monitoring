@@ -21,14 +21,14 @@ mvn clean package
 ```
 2. Modify server.xml
 ```
-    <entry key="admin.username">your name</entry>
-    <entry key="admin.password">your password</entry>
+<entry key="admin.username">your name</entry>
+<entry key="admin.password">your password</entry>
 ```
 3. Modify dispatcher-servlet
 ```
-    <!-- JDBC -->
-    <property name="username" value="your mysql id"/>
-    <property name="password" value="your mysql password"/>
+<!-- JDBC -->
+<property name="username" value="your mysql id"/>
+<property name="password" value="your mysql password"/>
 ```
 4. Deploy to tomcat
 
