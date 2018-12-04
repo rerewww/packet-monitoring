@@ -19,7 +19,18 @@ Quick Build
 ```
 mvn clean package
 ```
-2. Deploy to tomcat
+2. Modify server.xml
+```
+    <entry key="admin.username">your name</entry>
+    <entry key="admin.password">your password</entry>
+```
+3. Modify dispatcher-servlet
+```
+    <!-- JDBC -->
+    <property name="username" value="your mysql id"/>
+    <property name="password" value="your mysql password"/>
+```
+4. Deploy to tomcat
 
 
 Requirements
@@ -28,6 +39,8 @@ Requirements
 If you want to bootstrap Maven, you'll need:
 - Java 1.8+
 - Maven 3.0.5 or later
+- MySQL (options)
+- jNetPcap.jar (Last Update: 2017-05-17)
 
 License
 -------
