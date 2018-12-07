@@ -3,26 +3,15 @@
 
 <log4j:configuration>
 
-    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
         <layout class="org.apache.log4j.PatternLayout">
             <param name="ConversionPattern" value="%d{yyyy-MM-dd HH:mm:ss} [%-5p] (%F:%L) %m%n"/>
         </layout>
     </appender>
 
-    <appender name="FILEOUT" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="/home1/irteam/logs/logfile/convert.log"/>
-        <param name="Append" value="true"/>
-        <param name="DatePattern" value=".yyyy-MM-dd"/>
-        <param name="MaxNumberOfDays" value="30"/>
-        <param name="Threshold" value="DEBUG"/>
-        <layout class="org.apache.log4j.PatternLayout">
-            <param name="ConversionPattern" value="[%d{ISO8601}][%5p] - %m%n"/>
-        </layout>
-    </appender>
-
     <root>
         <level value="info"/>
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="console"/>
     </root>
 
 </log4j:configuration>
