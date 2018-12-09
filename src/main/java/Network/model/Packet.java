@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Packet {
-    String protocol;
     protected String localAddress;
     protected String remoteAddress;
     protected String flag;
@@ -23,10 +22,33 @@ public class Packet {
     protected int localPort;
     protected int remotePort;
     protected int size;
-
     protected EthernetModel ethernetModel;
     protected IpModel ipModel;
     protected TcpModel tcpModel;
+    protected UdpModel udpModel;
+    String protocol;
+
+    private Packet(
+            final String protocol,
+            final String localAddress,
+            final String remoteAddress,
+            final int localPort,
+            final int remotePort,
+            final int size,
+            final String hexDump,
+            final EthernetModel ethernetModel,
+            final IpModel ipModel
+    ) {
+        this.protocol = protocol;
+        this.localAddress = localAddress;
+        this.remoteAddress = remoteAddress;
+        this.localPort = localPort;
+        this.remotePort = remotePort;
+        this.size = size;
+        this.hexDump = hexDump;
+        this.ethernetModel = ethernetModel;
+        this.ipModel = ipModel;
+    }
 
     public Packet(
             final String protocol,
@@ -41,16 +63,24 @@ public class Packet {
             final IpModel ipModel,
             final TcpModel tcpModel
     ) {
-        this.protocol = protocol;
-        this.localAddress = localAddress;
-        this.remoteAddress = remoteAddress;
-        this.localPort = localPort;
-        this.remotePort = remotePort;
+        this(protocol, localAddress, remoteAddress, localPort, remotePort, size, hexDump, ethernetModel, ipModel);
         this.flag = flag;
-        this.size = size;
-        this.hexDump = hexDump;
-        this.ethernetModel = ethernetModel;
-        this.ipModel = ipModel;
         this.tcpModel = tcpModel;
+    }
+
+    public Packet(
+            final String protocol,
+            final String localAddress,
+            final String remoteAddress,
+            final int localPort,
+            final int remotePort,
+            final int size,
+            final String hexDump,
+            final EthernetModel ethernetModel,
+            final IpModel ipModel,
+            final UdpModel udpModel
+    ) {
+        this(protocol, localAddress, remoteAddress, localPort, remotePort, size, hexDump, ethernetModel, ipModel);
+        this.udpModel = udpModel;
     }
 }

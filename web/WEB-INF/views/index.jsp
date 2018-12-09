@@ -126,11 +126,11 @@
         <div id='hexDumpInfo' class="col-xs-6 col-sm-3 placeholder" style="
     width: 50%;
 ">
-          <h3 style="padding-bottom: 5px; font-weight: bold;">TCP/IP 4 Layer</h3>
+          <h3 style="padding-bottom: 5px; font-weight: bold;">Transport Layer</h3>
           <h4> Please select packet in table...</h4>
           <details id="ethernetContents" style="display: none"></details>
           <details id="ipContents" style="display: none"></details>
-          <details id="tcpContents" style="display: none"></details>
+          <details id="transport" style="display: none"></details>
           <details id="dumpContents" style="display: none"></details>
         </div>
       </div>
