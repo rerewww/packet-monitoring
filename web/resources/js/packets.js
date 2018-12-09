@@ -41,7 +41,7 @@ var packets = {
             if (!!detailInfos && !!detailInfos.tcpModel) {
                 renderer.tcp.render(detailInfos.tcpModel);
             } else if (!!detailInfos.udpModel) {
-                renderer.tcp.render(detailInfos.udpModel);
+                renderer.udp.render(detailInfos.udpModel);
             }
             renderer.dump.render(detailInfos.dump);
 
