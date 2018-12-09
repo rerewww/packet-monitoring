@@ -30,20 +30,24 @@ var packets = {
 
             var ethernetContents = document.getElementById('ethernetContents');
             var ipContents = document.getElementById('ipContents');
-            var tcpContents = document.getElementById('tcpContents');
+            var transport = document.getElementById('transport');
             var dumpContents = document.getElementById('dumpContents');
 
-            this._detailsRemoveChild([ethernetContents, ipContents, tcpContents, dumpContents]);
+            this._detailsRemoveChild([ethernetContents, ipContents, transport, dumpContents]);
 
             var detailInfos = JSON.parse(window.event.target.parentElement.getAttribute('value'));
             renderer.ethernet.render(detailInfos.ethernetModel);
             renderer.ip.render(detailInfos.ipModel);
-            renderer.tcp.render(detailInfos.tcpModel);
+            if (!!detailInfos && !!detailInfos.tcpModel) {
+                renderer.tcp.render(detailInfos.tcpModel);
+            } else if (!!detailInfos.udpModel) {
+                renderer.tcp.render(detailInfos.udpModel);
+            }
             renderer.dump.render(detailInfos.dump);
 
             viewStyle.setStyle(ethernetContents, 'display', 'block');
             viewStyle.setStyle(ipContents, 'display', 'block');
-            viewStyle.setStyle(tcpContents, 'display', 'block');
+            viewStyle.setStyle(transport, 'display', 'block');
             viewStyle.setStyle(dumpContents, 'display', 'block');
         }.bind(this);
 

@@ -26,7 +26,7 @@ var renderer = {
                 protocol.innerText = model[i].protocol;
                 viewStyle.setStyle(protocol, 'width', '10%');
 
-                var infoText = model[i].localPort + " -> " + model[i].remotePort + " [" + model[i].flag + "]" + " Length: " + model[i].size
+                var infoText = model[i].localPort + " -> " + model[i].remotePort + (!!model[i].flag ? " [" + model[i].flag + "]" : "") + " Length: " + model[i].size
                     + " ProcName: " + (!!model[i].processName ? model[i].processName : "off...");
                 var info = document.createElement('td');
                 info.innerText = infoText;
@@ -34,13 +34,15 @@ var renderer = {
                 detailInfos = {
                     ethernetModel: model[i].ethernetModel,
                     ipModel: model[i].ipModel,
-                    tcpModel: model[i].tcpModel,
                     dump: model[i].hexDump
                 };
+
+                if (!!model[i].tcpModel) {
+                    detailInfos.tcpModel = model[i].tcpModel;
+                } else if (!!model[i].udpModel) {
+                    detailInfos.udpModel = model[i].udpModel;
+                }
                 packetElem.setAttribute('value', JSON.stringify(detailInfos));
-                // if (model[i].protocol === 'Http') {
-                //     viewStyle.setStyle(packetElem, 'background-color', 'red');
-                // }
 
                 packetElem.appendChild(number);
                 packetElem.appendChild(localAddress);
@@ -96,9 +98,28 @@ var renderer = {
             if (model === null) {
                 return;
             }
-            var details = document.getElementById('tcpContents');
+            var details = document.getElementById('transport');
             var summary = document.createElement('summary');
             summary.textContent = 'Transfer Control Procotol';
+            details.appendChild(summary);
+
+            var keys = Object.keys(model);
+            keys.forEach(function (key) {
+                var p = document.createElement('p');
+                p.textContent = key + ': ' + model[key];
+                details.appendChild(p);
+            });
+        }
+    },
+
+    udp: {
+        render: function (model) {
+            if (model === null) {
+                return;
+            }
+            var details = document.getElementById('transport');
+            var summary = document.createElement('summary');
+            summary.textContent = 'User Datagram Procotol';
             details.appendChild(summary);
 
             var keys = Object.keys(model);
