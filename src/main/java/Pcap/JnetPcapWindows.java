@@ -82,23 +82,23 @@ public class JnetPcapWindows implements JnetPcacp {
                             new UdpModel(udp.source(), udp.destination(), udp.length())
                     ));
                 }
-//                if (pcapPacket.hasHeader(ethernet) && pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
-//                    String tcpFlags = StringUtils.collectionToDelimitedString(tcp.flagsEnum(), " ");
-//                    packetContainer.setPackets(new Packet(
-//                            tcp.getName(),
-//                            FormatUtils.ip(ip4.source()),
-//                            FormatUtils.ip(ip4.destination()),
-//                            tcp.source(),
-//                            tcp.destination(),
-//                            tcpFlags,
-//                            pcapPacket.getTotalSize(),
-//                            pcapPacket.toHexdump(),
-//                            new EthernetModel(FormatUtils.mac(ethernet.source()), FormatUtils.mac(ethernet.destination())),
-//                            new IpModel(ip4.version(), ip4.getHeaderLength(), ip4.getLength(), ip4.getId(), StringUtils.collectionToDelimitedString(ip4.flagsEnum(), " ")
-//                                    , ip4.ttl(), tcp.getNicname(), ip4.checksum(), FormatUtils.ip(ip4.source()), FormatUtils.ip(ip4.destination())),
-//                            new TcpModel(tcp.source(), tcp.destination(), tcp.seq(), tcp.ack(), tcp.getOffset(), tcp.window(), tcp.urgent(), tcpFlags)
-//                    ));
-//                }
+                if (pcapPacket.hasHeader(ethernet) && pcapPacket.hasHeader(ip4) && pcapPacket.hasHeader(tcp)) {
+                    String tcpFlags = StringUtils.collectionToDelimitedString(tcp.flagsEnum(), " ");
+                    packetContainer.setPackets(new Packet(
+                            tcp.getName(),
+                            FormatUtils.ip(ip4.source()),
+                            FormatUtils.ip(ip4.destination()),
+                            tcp.source(),
+                            tcp.destination(),
+                            tcpFlags,
+                            pcapPacket.getTotalSize(),
+                            pcapPacket.toHexdump(),
+                            new EthernetModel(FormatUtils.mac(ethernet.source()), FormatUtils.mac(ethernet.destination())),
+                            new IpModel(ip4.version(), ip4.getHeaderLength(), ip4.getLength(), ip4.getId(), StringUtils.collectionToDelimitedString(ip4.flagsEnum(), " ")
+                                    , ip4.ttl(), tcp.getNicname(), ip4.checksum(), FormatUtils.ip(ip4.source()), FormatUtils.ip(ip4.destination())),
+                            new TcpModel(tcp.source(), tcp.destination(), tcp.seq(), tcp.ack(), tcp.getOffset(), tcp.window(), tcp.urgent(), tcpFlags)
+                    ));
+                }
 
                 if (pcapPacket.hasHeader(http)) {
                     Packet packet = new Packet();
