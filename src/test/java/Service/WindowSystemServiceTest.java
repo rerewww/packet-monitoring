@@ -20,16 +20,15 @@ public class WindowSystemServiceTest {
 
     @Test
     public void getProcessNameFromPortTest() throws IOException {
-        // getProcessIdFromPort(포트 입력);
     }
 
     @Test
     public void getProcessNameFromPidTest() throws IOException {
-        // getProcessNameFromPid(프로세스 아이디 입력);
     }
 
     @Test
     public void getCpuAmountTest() {
-        windowSystemService.getCpuAmount();
+        int cpu = windowSystemService.getCpuAmount();
+        assertThat(cpu > 0, is(true));
     }
 }

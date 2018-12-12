@@ -27,7 +27,7 @@ var renderer = {
                 viewStyle.setStyle(protocol, 'width', '10%');
 
                 var infoText = model[i].localPort + " -> " + model[i].remotePort + (!!model[i].flag ? " [" + model[i].flag + "]" : "") + " Length: " + model[i].size
-                    + " ProcName: " + (!!model[i].processName ? model[i].processName : "off...");
+                    + " Process Name: " + (!!model[i].processName ? model[i].processName : "none");
                 var info = document.createElement('td');
                 info.innerText = infoText;
 
