@@ -46,7 +46,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" style="font-weight: bold;" href="/network">네트워크 모니터링</a>
+      <a class="navbar-brand" style="font-weight: bold;" href="/network">Packet Monitoring</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
