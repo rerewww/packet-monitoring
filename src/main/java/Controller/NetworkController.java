@@ -152,4 +152,16 @@ public class NetworkController {
         modelAndView.addObject("text", contents);
         return modelAndView;
     }
+
+    @RequestMapping("/setDetectLoop")
+    public void setDetectLoop(
+            @RequestParam("detectLoop") final int detectLoop
+    ) {
+        networkService.setLoop(detectLoop);
+    }
+
+    @RequestMapping("/setting")
+    public ModelAndView setting() {
+        return new ModelAndView("setting");
+    }
 }

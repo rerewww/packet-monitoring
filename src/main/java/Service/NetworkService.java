@@ -128,4 +128,8 @@ public class NetworkService {
     public List<Revision> getRevisions() {
         return revisionDao.select();
     }
+
+    public void setLoop(final int detectLoop) {
+        jnetPcacp.setLoop(detectLoop);
+    }
 }
