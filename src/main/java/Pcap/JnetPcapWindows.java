@@ -28,14 +28,12 @@ public class JnetPcapWindows implements JnetPcacp {
     private static final int FLAG = Pcap.MODE_NON_PROMISCUOUS;
     private static final int TIMEOUT = 10 * 1000; // ms
     private static final StringBuilder ERROR_BUF = new StringBuilder();
-    @Setter
-    private PcapIf device;
-    @Getter
-    private List<PcapIf> allDevices = new ArrayList<>();
-    private int detectLoop;
 
-    public JnetPcapWindows(final int detectLoop) {
-        this.detectLoop = detectLoop;
+    @Setter private PcapIf device;
+    @Getter private List<PcapIf> allDevices = new ArrayList<>();
+    @Getter @Setter private int detectLoop;
+
+    public JnetPcapWindows() {
         if (Pcap.findAllDevs(this.allDevices, ERROR_BUF) != Pcap.OK) {
             log.warn("[Error]: " + ERROR_BUF.toString());
         }
@@ -120,5 +118,10 @@ public class JnetPcapWindows implements JnetPcacp {
     @Override
     public boolean removeDevice() {
         return this.device == null;
+    }
+
+    @Override
+    public void setLoop(final int detectLoop) {
+        this.setDetectLoop(detectLoop);
     }
 }

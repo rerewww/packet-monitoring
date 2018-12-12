@@ -47,5 +47,17 @@ var setting = {
         if (this.clearIdMap.detectCheck === 'restart' && (isCheckedPackets || isCheckedGraph)) {
             devices.checkDevice(id);
         }
+    },
+
+    setDetectLoop: function () {
+        $.ajax({
+            url: '/network/setDetectLoop',
+            type:'GET',
+            async: false,
+            data: { detectLoop: document.getElementsByName('detectLoop')[0].value },
+            success: function() {
+                alert('completed');
+            }
+        });
     }
 };

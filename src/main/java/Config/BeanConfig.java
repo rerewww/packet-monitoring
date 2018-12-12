@@ -33,7 +33,8 @@ public class BeanConfig {
 
     @Bean
     public JnetPcapWindows jnetPcapWindows() {
-        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows(detectLoop);
+        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
+        jnetPcapWindows.setDetectLoop(detectLoop);
         return jnetPcapWindows;
     }
 

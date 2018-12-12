@@ -16,7 +16,8 @@ public class JnetPcapTest {
     @Before
     public void setUp() {
         int detectLoop = 1;
-        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows(detectLoop);
+        JnetPcapWindows jnetPcapWindows = new JnetPcapWindows();
+        jnetPcapWindows.setDetectLoop(detectLoop);
 
         JnetPcapFactory jnetPcapFactory = new JnetPcapFactory();
         jnetPcapFactory.setJnetPcapWindows(jnetPcapWindows);
