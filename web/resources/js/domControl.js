@@ -3,7 +3,7 @@
  */
 var domControl = {
   moveScroll: function () {
-      var divTable =document.getElementsByClassName('table-responsive')[0];
+      var divTable = document.getElementsByClassName('table-responsive')[0];
       divTable.scrollTop = divTable.scrollHeight;
   }
 };
